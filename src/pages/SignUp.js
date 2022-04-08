@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
 import Input from "../elements/Input";
@@ -13,36 +14,68 @@ const SignUp = () => {
   const [checkPw, setCheckPw] = useState();
 
   return (
-    <Grid width={"600px"} border={"1px solid black"} margin={"200px auto"}>
-      <Grid width={"300px"} border={"1px solid black"} margin={"0px auto"}>
+    <Grid
+      width={"660px"}
+      border={"2px solid black"}
+      margin={"200px auto"}
+      height={"600px"}
+      bor_radius
+    >
+      <Grid
+        width={"100%"}
+        border={"px solid black"}
+        margin={"120px auto 40px auto"}
+      >
         <Grid>
-          아이디:
-          <Input onChange={(e) => setUserID(e.target.value)}></Input>
+          아이디
+          <Input
+            width={"220px"}
+            onChange={(e) => setUserID(e.target.value)}
+          ></Input>
         </Grid>
         <Grid>
-          닉네임:
-          <Input onChange={(e) => setNickname(e.target.value)}></Input>
+          닉네임
+          <Input
+            width={"220px"}
+            onChange={(e) => setNickname(e.target.value)}
+          ></Input>
         </Grid>
         <Grid>
-          비밀번호:
-          <Input onChange={(e) => setPw(e.target.value)}></Input>
+          비밀번호
+          <Input
+            width={"220px"}
+            onChange={(e) => setPw(e.target.value)}
+          ></Input>
         </Grid>
         <Grid>
-          췤비밀번호:
-          <Input onChange={(e) => setCheckPw(e.target.value)}></Input>
+          확인비밀번호
+          <Input
+            width={"220px"}
+            onChange={(e) => setCheckPw(e.target.value)}
+          ></Input>
         </Grid>
       </Grid>
-      <Grid border={"1px solid black"} width={"250px"} margin={"10px auto"}>
-        <Button
-          onClick={() => {
-            dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
-          }}
-        >
-          회원가입
-        </Button>
-      </Grid>
+      <Button
+        width={"55%"}
+        margin={"0px auto"}
+        onClick={() => {
+          dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
+        }}
+      >
+        회원가입
+      </Button>
     </Grid>
   );
 };
+
+const InputBox = styled.div`
+  margin: -1px auto 0 auto;
+  border: 1px solid black;
+  width: 55%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 5px;
+  box-sizing: border-box;
+`;
 
 export default SignUp;
