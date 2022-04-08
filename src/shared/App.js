@@ -1,22 +1,17 @@
 import "./App.css";
-import AddComments from "../component/AddComments";
-import AddContents from "./../component/AddContents";
-import AddImage from "../component/AddImage";
-import Header from "../component/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
-
+import SignUp from "../pages/SignUp";
 
 function App() {
   return (
-    <div className="App">
-      {/* <Header></Header>
-      <AddContents></AddContents>
-      <AddComments></AddComments>
-      <AddImage></AddImage> */}
-      <Login></Login>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
-
 }
 
 export default App;
