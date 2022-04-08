@@ -1,18 +1,16 @@
-import React from "react";
-import {Route, Routes} from "react-router";
-
-import MainPost from "../component/MainPost";
-import DetailComments from "../component/DetailComments";
-import DetailContents from "../component/DetailContents";
+import "./App.css";
+import AddComments from "../component/AddComments";
+import AddContents from "./../component/AddContents";
+import AddImage from "../component/AddImage";
 
 function App() {
-    return (
-        <div>
-            <MainPost/>
-            <DetailComments/>
-            <DetailContents/>
-        </div>
-    )
+  return (
+    <div className="App">
+      <AddContents></AddContents>
+      <AddComments></AddComments>
+      <AddImage></AddImage>
+    </div>
+  );
 
 }
 
