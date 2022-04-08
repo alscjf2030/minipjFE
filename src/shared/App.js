@@ -1,7 +1,19 @@
-import "./App.css";
+import React from "react";
+import {Route, Routes} from "react-router";
+
+import MainPost from "../component/MainPost";
+import DetailComments from "../component/DetailComments";
+import DetailContents from "../component/DetailContents";
 
 function App() {
-  return <div className="App">메인입니다</div>;
+    return (
+        <div>
+            <MainPost/>
+            <DetailComments/>
+            <DetailContents/>
+        </div>
+    )
+
 }
 
 export default App;
