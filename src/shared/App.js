@@ -3,14 +3,17 @@ import AddComments from "../component/AddComments";
 import AddContents from "./../component/AddContents";
 import AddImage from "../component/AddImage";
 import Header from "../component/Header";
+import Login from "../pages/Login";
+
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
+      {/* <Header></Header>
       <AddContents></AddContents>
       <AddComments></AddComments>
-      <AddImage></AddImage>
+      <AddImage></AddImage> */}
+      <Login></Login>
     </div>
   );
 
