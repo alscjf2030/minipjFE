@@ -11,6 +11,7 @@ function App() {
       <AddImage></AddImage>
     </div>
   );
+
 }
 
 export default App;
