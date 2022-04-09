@@ -21,12 +21,12 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (token && userInfo) {
+    if (token) {
       dispatch(userActions.LoginCheckSP(sessionStorage.getItem("jwt_token")));
     }
   }, []);
 
-  if (token) {
+  if (token && userInfo) {
     return (
       <Grid
         is_flex
