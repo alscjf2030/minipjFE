@@ -14,29 +14,35 @@ const AddComments = () => {
 
   const addComment = () => {
     dispatch(
-      commentActions.addCommentSP(
-        userId,
-        "boardId",
-        comment,
-        sessionStorage.getItem("jwt_token")
-      )
+        commentActions.addCommentSP(
+            userId,
+            "boardId",
+            comment,
+            sessionStorage.getItem("jwt_token")
+        )
     );
   };
 
-  return (
-    <Grid width={"80%"} margin={"0 auto"} border={"1px solid black"} bor_radius>
-      <Grid is_flex>
-        <ContentsInput
-          width={"740px"}
-          height={"100px"}
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-        ></ContentsInput>
-        <Button onClick={addComment}>작성하기</Button>
-      </Grid>
-    </Grid>
-  );
+    return (
+        <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "0 auto",
+            border: "1px solid black",
+            borderRadius: "10px"
+        }}>
+            <ContentsInput
+                width={"80%"}
+                height={"80%"}
+                onChange={(e) => {
+                    setComment(e.target.value);
+                }}
+            ></ContentsInput>
+            <Button onClick={addComment}>작성하기</Button>
+        </div>
+    );
 };
 
 export default AddComments;

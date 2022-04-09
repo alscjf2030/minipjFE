@@ -1,20 +1,13 @@
 import React from "react";
-import MainPost from "../component/MainPost";
 import Grid from "../elements/Grid";
-import Header from "./../component/Header";
+import ContentsList from "./ContentsList";
 
 const Main = () => {
-  return (
-    <Grid>
-      <Header></Header>
-      <Grid width={"90%"} margin={"0 auto"} >
-        <MainPost></MainPost>
-        <MainPost></MainPost>
-        <MainPost></MainPost>
-        <MainPost></MainPost>
-      </Grid>
-    </Grid>
-  );
+    return (
+        <Grid width={"80%"} margin={"0 auto"}>
+            <ContentsList/>
+        </Grid>
+    );
 };
 
 export default Main;

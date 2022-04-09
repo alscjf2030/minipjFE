@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-  const { src, width, height, bor_radius } = props;
+  const { src, width, height, bor_radius, onClick } = props;
   const styles = { width: width, height: height, bor_radius: bor_radius };
-  return <Img src={src} {...styles}></Img>;
+  return <Img src={src} {...styles} onClick={onClick}></Img>;
 };
 
 const Img = styled.img`

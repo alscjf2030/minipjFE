@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 
 import user from "./modules/user";
 import comment from "./modules/comment";
+import post from "./modules/post";
 
 const rootReducer = combineReducers({
   user: user,
   comment: comment,
+  post: post
 });
 
 const middlewares = [thunk];
@@ -19,9 +21,9 @@ if (env === "development") {
 }
 
 const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+    typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+        : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 

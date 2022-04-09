@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { children, onClick, margin, width, height, fontSize } = props;
+  const { children, onClick, margin, width, height, fontSize, text } = props;
   const styles = {
     margin: margin,
     width: width,
@@ -10,13 +10,15 @@ const Button = (props) => {
     fontSize: fontSize,
   };
   return (
-    <Btn onClick={onClick} {...styles}>
-      {children}
-    </Btn>
+      <Btn onClick={onClick} {...styles}>
+        {text ? text : children}
+      </Btn>
   );
 };
 
 Button.defaultProps = {
+  text: false,
+  onClick: () => {},
   height: "50px",
   margin: "50px auto",
   width: "120px",
@@ -24,7 +26,6 @@ Button.defaultProps = {
 };
 
 const Btn = styled.div`
-  // border: 1px solid black;
   border-radius: 5px;
   box-sizing: border-box;
   background-color: black;
