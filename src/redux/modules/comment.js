@@ -28,9 +28,20 @@ const addCommentSP = () => {
   };
 };
 
+const initialState = {};
+
 // 리듀서
-export default handleActions({
-  [ADDCOMMENT]: (state, action) => produce(state, (draft) => {}),
-  [UPDATE]: (state, action) => produce(state, (draft) => {}),
-  [DELETE]: (state, action) => produce(state, (draft) => {}),
-});
+export default handleActions(
+  {
+    [ADDCOMMENT]: (state, action) => produce(state, (draft) => {}),
+    [UPDATE]: (state, action) => produce(state, (draft) => {}),
+    [DELETE]: (state, action) => produce(state, (draft) => {}),
+  },
+  initialState
+);
+
+const actionCreators = {
+  addCommentSP,
+};
+
+export { actionCreators };
