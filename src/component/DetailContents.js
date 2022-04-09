@@ -4,12 +4,13 @@ import styled from "styled-components";
 import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import Text from "../elements/Text";
+import DetailComments from "./DetailComments";
 
 const DetailContents = (props) => {
 
     return (
         <HeadLine>
-            <Grid>
+            <div>
                 <Grid is_flex width="auto">
                     <Text>닉네임</Text>
                     <Text>작성시간</Text>
@@ -22,21 +23,21 @@ const DetailContents = (props) => {
                         <Image src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
                     </div>
                     <div style={{width: "50%", textAlign: "center"}}>
-                        <Text>게시물 내용</Text>
+                        <Text>상세 페이지 내용</Text>
                     </div>
                 </div>
-            </Grid>
-            <Grid>
-                <div>상세 페이지 내용</div>
+                <div style={{display:"flex"}}>
+                    <div style={{display:"flex"}}>
+                        <Image width="200px" height="200px" src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
+                        <Image width="200px" height="200px" src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
+                        <Image width="200px" height="200px" src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
+                    </div>
 
-                <Grid>
-                    title
-                </Grid>
-
-                <Grid>
-                    contents
-                </Grid>
-            </Grid>
+                    <Grid>
+                        <DetailComments/>
+                    </Grid>
+                </div>
+            </div>
         </HeadLine>
 
     )
@@ -47,5 +48,5 @@ export default DetailContents
 const HeadLine = styled.div`
   position: relative;
   margin: auto;
-  max-width: 1200px;
+  max-width: 80%;
 `
