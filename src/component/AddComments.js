@@ -7,12 +7,20 @@ import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const AddComments = () => {
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.userInfo.userId);
 
   const [comment, setComment] = useState();
-  console.log(comment);
+  // console.log(comment);
 
   const addComment = () => {
-    dispatch(commentActions.addCommentSP("userId", "boardId", comment));
+    dispatch(
+      commentActions.addCommentSP(
+        userId,
+        "boardId",
+        comment,
+        sessionStorage.getItem("jwt_token")
+      )
+    );
   };
 
   return (

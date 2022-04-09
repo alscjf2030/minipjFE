@@ -10,6 +10,7 @@ import DetailComments from "../component/DetailComments";
 function App() {
   return (
     <>
+      <AddComments></AddComments>
       <DetailComments></DetailComments>
       <BrowserRouter>
         <Routes>

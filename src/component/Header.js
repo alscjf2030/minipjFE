@@ -1,15 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import Grid from "../elements/Grid";
 import Button from "../elements/Button";
 import Image from "../elements/Image";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Header = () => {
   const navigate = useNavigate();
-  // const is_login = useSelector((state) => state.user.is_login);
-  const is_login = null;
-  if (is_login) {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const state = useSelector((state) => {
+    console.log(state);
+  });
+  const token = sessionStorage.getItem("jwt_token") ? true : false;
+
+  const logout = () => {
+    dispatch(userActions.LogOutSP(sessionStorage.getItem("jwt_token")));
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (token && userInfo) {
+      dispatch(userActions.LoginCheckSP(sessionStorage.getItem("jwt_token")));
+    }
+  }, []);
+
+  if (token) {
     return (
       <Grid
         is_flex
@@ -45,13 +62,7 @@ const Header = () => {
           >
             알림
           </Button>
-          <Button
-            width={"120px"}
-            margin={"0 5px"}
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
+          <Button width={"120px"} margin={"0 5px"} onClick={logout}>
             로그아웃
           </Button>
         </Grid>
