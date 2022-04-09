@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
 import Input from "../elements/Input";
 import { creatActions as userActions } from "../redux/modules/user";
-import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const naviagate = useNavigate();
   const dispatch = useDispatch();
   const [userId, setUserID] = useState(null);
   const [pw, setPw] = useState(null);
 
   const login = () => {
     dispatch(userActions.LoginSP(userId, pw));
+    naviagate("/");
   };
 
   return (
