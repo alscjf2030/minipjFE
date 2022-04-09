@@ -4,24 +4,29 @@ import axios from "axios";
 
 //액션 타입
 const ADDCOMMENT = "ADDCOMMENT";
-const UPDATE = "UPDATE";
+const GETCOMMENT = "GETCOMMENT";
 const DELETE = "DELETE";
+const UPDATE = "UPDATE";
 
 // 액션 생성 함수
 const addComment = createAction(ADDCOMMENT, (user) => ({ user }));
-const updateComment = createAction(UPDATE, (user) => ({ user }));
-const deleteComment = createAction(DELETE, (user) => ({ user }));
+const getComment = createAction(GETCOMMENT, (comment) => ({ comment }));
+const deleteComment = createAction(DELETE, (commentInfo) => ({ commentInfo }));
+const updateComment = createAction(UPDATE, (commentInfo) => ({ commentInfo }));
+
+const initialState = { comment: [] };
 
 // 미들웨어
-const addCommentSP = (userId, boardId, comment, token) => {
+const addCommentSP = (userinfo, token) => {
   return function (dispatch, getState) {
+    console.log(userinfo);
     axios
       .post(
         "http://52.79.228.83:8080/api/comment/regist",
         {
-          userId: 1,
-          boardId: 1,
-          comment: comment,
+          userId: userinfo.userId,
+          boardId: userinfo.boardId,
+          comment: userinfo.comment,
         },
         {
           headers: {
@@ -31,35 +36,98 @@ const addCommentSP = (userId, boardId, comment, token) => {
       )
       .then((res) => {
         console.log(res);
+        dispatch(addComment(userinfo));
       })
       .catch((err) => console.log(err));
   };
 };
 
-const initialState = { list: [] };
-const initialComment = {
-  userInfo: {
-    userId: 1,
-    useremail: "aaa@aaa.com",
-    nickname: "aaa",
-  },
-  boardId: 1,
-  comments: "와아아아이쁘네요",
-  insertDt: "YYYY-MM-DD-hh-mm",
+const getCommentSP = (boardId, token) => {
+  return function (dispatch) {
+    axios
+      .get(`http://52.79.228.83:8080/api/comment/${boardId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        const post = res.data;
+        dispatch(getComment(post));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
+
+const deleteCommentSP = (commentInfo, token) => {
+  return function (dispatch) {
+    axios
+      .delete(`http://52.79.228.83:8080/api/comment/${commentInfo.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        dispatch(deleteComment(commentInfo));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const updateCommentSP = (commentInfo, token) => {
+  return function (dispatch) {
+    axios
+      .put(
+        `http://52.79.228.83:8080/api/comment/${commentInfo}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const initialComment = {};
 
 // 리듀서
 export default handleActions(
   {
-    [ADDCOMMENT]: (state, action) => produce(state, (draft) => {}),
+    [ADDCOMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.comment.unshift(action.payload.user);
+      }),
+    [GETCOMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.comment);
+        draft.comment = action.payload.comment;
+      }),
+    [DELETE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(state.comment);
+        const index = state.comment.indexOf(action.payload.commentInfo);
+        console.log(draft.comment);
+        draft.comment.splice(index, 1);
+      }),
     [UPDATE]: (state, action) => produce(state, (draft) => {}),
-    [DELETE]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
 
 const actionCreators = {
   addCommentSP,
+  getCommentSP,
+  deleteCommentSP,
+  updateCommentSP,
 };
 
 export { actionCreators };

@@ -7,42 +7,49 @@ import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const AddComments = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.userInfo.userId);
+  const userinfo = useSelector((state) => state.user.userInfo);
+  console.log(userinfo);
 
   const [comment, setComment] = useState();
-  // console.log(comment);
+
+  const info = {
+    boardId: 1,
+    comment: comment,
+    userId: userinfo.userId,
+    userInfo: {
+      nickname: userinfo.nickname,
+      username: userinfo.useremail,
+    },
+  };
 
   const addComment = () => {
     dispatch(
-        commentActions.addCommentSP(
-            userId,
-            "boardId",
-            comment,
-            sessionStorage.getItem("jwt_token")
-        )
+      commentActions.addCommentSP(info, sessionStorage.getItem("jwt_token"))
     );
   };
 
-    return (
-        <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "0 auto",
-            border: "1px solid black",
-            borderRadius: "10px"
-        }}>
-            <ContentsInput
-                width={"80%"}
-                height={"80%"}
-                onChange={(e) => {
-                    setComment(e.target.value);
-                }}
-            ></ContentsInput>
-            <Button onClick={addComment}>작성하기</Button>
-        </div>
-    );
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "0 auto",
+        border: "1px solid black",
+        borderRadius: "10px",
+      }}
+    >
+      <ContentsInput
+        width={"80%"}
+        height={"80%"}
+        onChange={(e) => {
+          setComment(e.target.value);
+        }}
+      ></ContentsInput>
+      <Button onClick={addComment}>작성하기</Button>
+    </div>
+  );
 };
 
 export default AddComments;
