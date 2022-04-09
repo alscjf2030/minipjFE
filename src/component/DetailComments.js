@@ -1,48 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import Text from "../elements/Text";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commentActions } from "../redux/modules/comment";
+import Button from "../elements/Button";
 
 const DetailComments = (props) => {
+  const dispatch = useDispatch();
+  const comment = useSelector((state) => state.comment.comment);
+  const token = sessionStorage;
 
-    return(
-        <Grid>
-            <CommentItem/>
-            <CommentItem/>
-            <CommentItem/>
+  useEffect(() => {
+    dispatch(
+      commentActions.getCommentSP(1, sessionStorage.getItem("jwt_token"))
+    );
+    console.log("실행되니");
+  }, []);
+
+  return (
+    <>
+      {comment.map((cur, idx) => (
+        <Grid
+          is_flex
+          border={"1px solid black"}
+          width={"780px"}
+          height={"120px"}
+          key={cur.id}
+        >
+          <Grid>
+            <span>{cur.userInfo.nickname}</span>
+            <p>{cur.comment}</p>
+          </Grid>
+          <Button
+            onClick={() => {
+              dispatch(
+                commentActions.deleteCommentSP(
+                  cur,
+                  sessionStorage.getItem("jwt_token")
+                )
+              );
+            }}
+          >
+            삭제
+          </Button>
         </Grid>
-    )
-}
+      ))}
+    </>
+  );
+};
 
-export default DetailComments
-
-
-const CommentItem = (props) => {
-
-    const {user_profile, user_name, user_id, post_id, contents, insert_dt} = props;
-    return (
-        <Grid is_flex>
-            <Grid is_flex width="auto">
-                <Text bold>{user_name}</Text>
-            </Grid>
-
-            <Grid is_flex margin="0px 4px">
-                <Text margin="0px">{contents}</Text>
-            </Grid>
-
-            <Grid is_flex margin="0px 4px">
-                <Text margin="0px">{insert_dt}</Text>
-            </Grid>
-        </Grid>
-    )
-}
-
-CommentItem.defaultProps = {
-    user_profile: "",
-    user_name: "smc",
-    user_id: "",
-    post_id: 1,
-    contents: "여기에 댓글이 입력됩니다.",
-    insert_dt: '2021-01-01 19:00:00'
-}
+export default DetailComments;
