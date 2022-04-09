@@ -32,7 +32,7 @@ const SignUpSP = (userId, nickname, pw, checkPw) => {
   return function (dispatch, getState) {
     axios
       .post("http://52.79.228.83:8080/user/signup", {
-        useremail: userId,
+        username: userId,
         nickname: nickname,
         password: pw,
         passwordCheck: checkPw,
@@ -48,8 +48,7 @@ const SignUpSP = (userId, nickname, pw, checkPw) => {
 export default handleActions(
   {
     [LOGIN]: (state, action) => produce(state, (draft) => {}),
-    [LOGIN]: (state, action) => produce(state, (draft) => {}),
-    [LOGIN]: (state, action) => produce(state, (draft) => {}),
+    [SIGNUP]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );

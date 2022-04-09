@@ -3,26 +3,12 @@ import React from "react";
 import Grid from "../elements/Grid";
 
 const DetailComments = (props) => {
+  return (
+    <Grid width={"70%"} border={"1px solid black"} margin={"0 auto"}>
+      <div>닉네임</div>
+      <div>이거 별로임</div>
+    </Grid>
+  );
+};
 
-    return(
-        <Grid>
-            <Grid>
-                댓글작성페이지
-            </Grid>
-
-            <Grid>
-                1
-            </Grid>
-
-            <Grid>
-                2
-            </Grid>
-
-            <Grid>
-                3
-            </Grid>
-        </Grid>
-    )
-}
-
-export default DetailComments
+export default DetailComments;
