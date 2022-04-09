@@ -3,15 +3,22 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
 import Input from "../elements/Input";
-import { creatActions as userActions } from "../redux/modules/user";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userId, setUserID] = useState();
   const [nickname, setNickname] = useState();
   const [pw, setPw] = useState();
   const [checkPw, setCheckPw] = useState();
+
+  const signup = () => {
+    dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
+    navigate("/login");
+  };
 
   return (
     <Grid
@@ -55,13 +62,7 @@ const SignUp = () => {
           ></Input>
         </Grid>
       </Grid>
-      <Button
-        width={"55%"}
-        margin={"0px auto"}
-        onClick={() => {
-          dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
-        }}
-      >
+      <Button width={"55%"} margin={"0px auto"} onClick={signup}>
         회원가입
       </Button>
     </Grid>
