@@ -5,35 +5,43 @@ import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import Text from "../elements/Text";
 import DetailComments from "./DetailComments";
+import AddComments from "./AddComments";
 
 const DetailContents = (props) => {
 
+    const {user_name, insert_dt} = props;
+
     return (
         <HeadLine>
-            <div>
-                <Grid is_flex width="auto">
-                    <Text>닉네임</Text>
-                    <Text>작성시간</Text>
+            <div style={{ display: "flex", justifyContent: "space-between"}}>
+                <div style={{ display: "flex" }}>
+                    <Text>{user_name}</Text>
+                    <Text>{insert_dt}</Text>
+                </div>
+                <div>
                     <button>수정</button>
                     <button>삭제</button>
-                </Grid>
+                </div>
+            </div>
 
-                <div style={{display: "flex", justifyContent: "flex-start"}}>
-                    <div style={{width: "50%"}}>
-                        <Image src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
-                    </div>
-                    <div style={{width: "50%", textAlign: "center"}}>
+            <div>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                }}>
+                    <Image src="img/logo.png"/>
+                    <div style={{
+                        width: "50%",
+                        textAlign: "center"
+                    }}>
                         <Text>상세 페이지 내용</Text>
                     </div>
                 </div>
-                <div style={{display:"flex"}}>
-                    <div style={{display:"flex"}}>
-                        <Image width="200px" height="200px" src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
-                        <Image width="200px" height="200px" src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
-                        <Image width="200px" height="200px" src={"https://img.marieclairekorea.com/2022/02/mck_620b83ff0751b.jpg"}/>
-                    </div>
-
-                    <Grid>
+                <div style={{margin: "auto"}}>
+                    <Grid padding="16px">
+                        <AddComments/>
                         <DetailComments/>
                     </Grid>
                 </div>
@@ -41,6 +49,15 @@ const DetailContents = (props) => {
         </HeadLine>
 
     )
+}
+
+DetailContents.defaultProps = {
+    user_profile: "",
+    user_name: "smc",
+    user_id: "",
+    post_id: 1,
+    contents: "여기에 댓글이 입력됩니다.",
+    insert_dt: '2021-01-01'
 }
 
 export default DetailContents

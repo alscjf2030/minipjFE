@@ -1,20 +1,46 @@
-import React from "react";
-import {Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import styled, { createGlobalStyle } from "styled-components";
 
-import AddComments from "../component/AddComments";
-import AddContents from "./../component/AddContents";
-import AddImage from "../component/AddImage";
-import Header from "../component/Header";
+import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
+import Main from "../pages/Main";
 import Detail from "../pages/Detail";
+import AddPost from "../pages/AddPost";
+
+import Header from "../component/Header";
+import AddComments from "./../component/AddComments";
+import DetailComments from "../component/DetailComments";
+
+
 function App() {
     return (
-        <div>
-            <Header></Header>
-            <Routes>
-                <Route path="/detail" element={<Detail/>}/>
-            </Routes>
-        </div>
-    )
+        <MainContainer>
+            <BrowserRouter>
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<Main/>} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/detail" element={<Detail/>}/>
+                    <Route path="/write" element={<AddPost/>}/>
+                </Routes>
+            </BrowserRouter>
+            <GlobalStyle/>
+        </MainContainer>
+    );
 }
 
 export default App;
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+`
+
+const MainContainer = styled.div`
+  position: relative;
+  margin: auto;
+  max-width: 80%;
+`
+

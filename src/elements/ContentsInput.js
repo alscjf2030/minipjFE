@@ -16,7 +16,7 @@ const PostInput = (props) => {
 
 PostInput.defaultProps = {
   height: false,
-  width: "520px",
+  width: false,
 };
 
 const TextInput = styled.textarea`

@@ -11,6 +11,8 @@ const Grid = (props) => {
     border,
     bor_radius,
     shadow,
+    height,
+    line_height,
     children,
   } = props;
 
@@ -23,6 +25,8 @@ const Grid = (props) => {
     bg: bg,
     bor_radius: bor_radius,
     shadow: shadow,
+    height: height,
+    line_height: line_height,
   };
 
   return (
@@ -42,6 +46,8 @@ Grid.defualtProps = {
   bg: false,
   bor_radius: false,
   shadow: false,
+  height: "100%",
+  line_height: false,
 };
 
 const GridBox = styled.div`
@@ -49,7 +55,8 @@ const GridBox = styled.div`
   ${(props) => (props.bor_radius ? `border-radius: 10px;` : "")}
   ${(props) => (props.shadow ? `box-shadow: 5px 5px 5px gray;` : "")}
   width: ${(props) => props.width};
-  height: 100%;
+  height: ${(props) => props.height};
+  ${(props) => (props.line_height ? `line-height: ${props.line_height};` : "")}
   box-sizing: border-box;
   word-break:break-all;
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
