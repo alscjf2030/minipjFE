@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import Modal from "react-modal"
 
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
@@ -14,25 +15,27 @@ import AddComments from "./../component/AddComments";
 import DetailComments from "../component/DetailComments";
 
 function App() {
-    return (
-        <MainContainer>
-            <BrowserRouter>
-                <Header/>
-                {/*<div style={{display:"flex", float: "right"}}>*/}
-                {/*    <Button>로그인시 글쓰기</Button>*/}
-                {/*</div>*/}
-                <Routes>
-                    <Route path="/" element={<Main/>} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/detail" element={<Detail/>}/>
-                    <Route path="/write" element={<AddPost/>}/>
-                </Routes>
-            </BrowserRouter>
-            <GlobalStyle/>
-        </MainContainer>
-    );
+  return (
+    <MainContainer>
+      <BrowserRouter>
+        <Header />
+        {/*<div style={{display:"flex", float: "right"}}>*/}
+        {/*    <Button>로그인시 글쓰기</Button>*/}
+        {/*</div>*/}
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/detail" element={<Detail />} />
+          <Route path="/write" element={<AddPost />} />
+        </Routes>
+      </BrowserRouter>
+      <GlobalStyle />
+    </MainContainer>
+  );
 }
+
+Modal.setAppElement("#root");
 
 export default App;
 
@@ -40,11 +43,10 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-`
+`;
 
 const MainContainer = styled.div`
   position: relative;
   margin: auto;
   max-width: 80%;
-`
-
+`;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ContentsInput from "../elements/ContentsInput";
+import ContentsInput from "../elements/PostInput";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
 import { actionCreators as commentActions } from "../redux/modules/comment";
