@@ -9,7 +9,7 @@ import DetailComments from "../component/DetailComments";
 const Detail = (props) => {
 
     return (
-        <Grid>
+        <Grid >
             <DetailContents/>
         </Grid>
     )

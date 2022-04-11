@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ContentsInput from "../elements/PostInput";
+import PostInput from "../elements/PostInput";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
 import { actionCreators as commentActions } from "../redux/modules/comment";
@@ -35,18 +35,20 @@ const AddComments = () => {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        margin: "0 auto",
+        margin: "20px auto",
         border: "1px solid black",
         borderRadius: "10px",
+        width: "780px",
       }}
     >
-      <ContentsInput
-        width={"80%"}
-        height={"80%"}
+      <PostInput
+        width={"500px"}
+        height={"100px"}
+        margin={"0 0 0 10px"}
         onChange={(e) => {
           setComment(e.target.value);
         }}
-      ></ContentsInput>
+      ></PostInput>
       <Button onClick={addComment}>작성하기</Button>
     </div>
   );

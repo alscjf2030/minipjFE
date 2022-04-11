@@ -8,14 +8,27 @@ import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const DetailComments = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [upComment, setUpComment] = useState();
   const dispatch = useDispatch();
   // const comment = useSelector((state) => state.comment.comment);
   const comment = [
     {
       userInfo: {
         nickname: "kop",
+        userId: 1,
       },
+      boardId: 1,
       comment: "와아아아ㅏ아",
+      id: 1,
+    },
+    {
+      userInfo: {
+        nickname: "kop",
+        userId: 1,
+      },
+      boardId: 1,
+      comment: "와아아아ㅏ아",
+      id: 1,
     },
   ];
   // const token = sessionStorage;
@@ -36,8 +49,11 @@ const DetailComments = (props) => {
         <Grid
           is_flex
           border={"1px solid black"}
+          bor_radius
           width={"780px"}
+          padding={"20px"}
           height={"120px"}
+          margin={"0 auto 20px auto"}
           key={cur.id}
         >
           <Grid>
@@ -77,12 +93,33 @@ const DetailComments = (props) => {
               height={"150px"}
               margin={"60px auto -20px auto"}
             >
-              <PostInput width={"600px"} height={"80px"} margin={"auto"}>
+              <PostInput
+                width={"600px"}
+                height={"80px"}
+                margin={"auto"}
+                onChange={(e) => {
+                  setUpComment(e.target.value);
+                }}
+                defaultValue={cur.comment}
+              >
                 {cur.userInfo.nickname}
               </PostInput>
             </Grid>
             <Grid is_flex width={"300px"} margin={"0 auto"}>
-              <Button>수정</Button>
+              <Button
+                onClick={() => {
+                  dispatch(
+                    commentActions.updateCommentSP({
+                      userId: cur.userInfo.userId,
+                      boardId: cur.boardId,
+                      comment: upComment,
+                      commentId: cur.id,
+                    })
+                  );
+                }}
+              >
+                수정
+              </Button>
               <Button
                 onClick={() => {
                   setIsOpen(false);

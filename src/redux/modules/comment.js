@@ -80,17 +80,25 @@ const deleteCommentSP = (commentInfo, token) => {
 
 const updateCommentSP = (commentInfo, token) => {
   return function (dispatch) {
+    console.log(commentInfo);
     axios
       .put(
-        `http://52.79.228.83:8080/api/comment/${commentInfo}`,
-        {},
+        `http://52.79.228.83:8080/api/comment/${commentInfo.commentId}`,
+        {
+          userId: commentInfo.userId,
+          boardId: commentInfo.boardId,
+          comment: commentInfo.comment,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       )
-      .then((res) => {})
+      .then((res) => {
+        console.log(res);
+        dispatch(updateComment(commentInfo));
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -118,7 +126,11 @@ export default handleActions(
         console.log(draft.comment);
         draft.comment.splice(index, 1);
       }),
-    [UPDATE]: (state, action) => produce(state, (draft) => {}),
+    [UPDATE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action);
+        console.log(state);
+      }),
   },
   initialState
 );
