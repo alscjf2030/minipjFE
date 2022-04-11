@@ -7,6 +7,7 @@ import {
   putApi,
   setClient,
 } from "../../api/client";
+import axios from "axios";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -33,19 +34,29 @@ const initialPost = {
   is_me: false,
 };
 
-const addPostSP = (data, navigate) => {
+const addPostSP = (data, token) => {
+  console.log(data);
   return function (dispatch, getState) {
     const _image = getState().image.preview;
 
-    postApi(
-      "/api/board/regist",
-      {
-        title: data.title,
-        content: data.content,
-        userId: data.userId,
-      },
-      setClient
-    )
+    axios
+      .post(
+        "http://52.79.228.83:8080/api/board/regist",
+        {
+          title: "이거 이제 되니",
+          content: "dfdfdfdfd",
+          userId: 1,
+          headinfo: "브랜드",
+          topinfo: "브랜드",
+          bottominfo: "브랜드",
+          shoesinfo: "브랜드",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         // dispatch(addPost(data));
