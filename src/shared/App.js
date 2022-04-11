@@ -18,22 +18,9 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 function App() {
   return (
     <MainContainer>
-      <Navbar bg="primary" variant="dark">
-        <Container>
-          <Grid is_flex>
-            <Navbar.Brand href="/">Hang 9</Navbar.Brand>
-            <Nav className="me-auto">
-              <Grid is_flex>
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/signup">회원가입</Nav.Link>
-                <Nav.Link href="/login">로그인</Nav.Link>
-              </Grid>
-            </Nav>
-          </Grid>
-        </Container>
-      </Navbar>
+
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
