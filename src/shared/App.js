@@ -13,29 +13,21 @@ import Header from "../component/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
-import {useEffect} from "react";
-import {setClient} from "../api/client";
+import { useEffect } from "react";
+import { setClient } from "../api/client";
 
 function App() {
-
-    useEffect(() => {
-        const token = sessionStorage.getItem('jwt_token')
-        if ( token ) {
-            setClient(token)
-        }
-    }, [])
-
     return (
         <MainContainer>
-                <Header/>
-                <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/detail" element={<Detail />}/>
-                    <Route path="/write" element={<AddPost />}/>
-                </Routes>
-            <GlobalStyle/>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/detail/" element={<Detail />} />
+                <Route path="/write" element={<AddPost />} />
+            </Routes>
+            <GlobalStyle />
         </MainContainer>
     );
 }

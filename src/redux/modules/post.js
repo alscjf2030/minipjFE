@@ -1,19 +1,25 @@
-import { createAction, handleActions } from "redux-actions";
+import {createAction, handleActions} from "redux-actions";
 import produce from "immer";
-import {deleteApi, postApi, putApi} from "../../api/client";
+import {
+    deleteApi,
+    getApi,
+    postApi,
+    putApi,
+    setClient,
+} from "../../api/client";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
 
-const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
-const addPost = createAction(ADD_POST, (post) => ({ post }));
+const setPost = createAction(SET_POST, (post_list) => ({post_list}));
+const addPost = createAction(ADD_POST, (post) => ({post}));
 
 const initialState = {
     list: [],
 };
 
 const initialPost = {
-    id: 0,
+    boardId: 0,
     user_info: {
         user_name: "SMC",
         user_profile:
@@ -25,35 +31,73 @@ const initialPost = {
     comment_cnt: 50,
     insert_dt: "2022-04-09 10:00:00",
     is_me: false,
-}
+};
 
-const addPostSP = (data, navigate) => {
+const addPostSP = (data, image, navigate) => {
     return function (dispatch, getState) {
 
-        const _image = getState().image.preview;
+        postApi(
+            "/api/board/regist",
+            data
+        ).then((res) => {
+            console.log(res);
+            postApi('/api/board/photo', {
+                boardId: res.data.boardId,
+                file: image
+            }).catch((err) => {
+                console.log(err)
+                window.alert("이미지 업로드에 실패했습니다.");
+            })
+            dispatch(addPost(data));
+            navigate('/')
+        }).catch((err) => {
+            console.log(err);
+            window.alert("게시물 작성에 실패했습니다.");
+        });
+    };
+};
 
-
-        postApi("/api/board/regist", {
-            title : data.title,
-            content : data.content,
-            userId : data.userId
-        })
+const getPostSp = () => {
+    return function (dispatch, getState) {
+        getApi("/api/board")
             .then((res) => {
-                dispatch(addPost(data))
-                navigate('/', { replace : true })
                 console.log(res);
             })
             .catch((err) => {
-                console.log(err)
-                window.alert("게시물 작성에 실패했습니다.")
+                console.log(err);
             });
-    }
-}
+    };
+};
 
+const deletePostSp = (data) => {
+    return function (dispatch, getState) {
+        deleteApi(`/api/board/${data.boardid}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+                window.alert("게시물 작성에 실패했습니다.");
+            });
+    };
+};
+
+const updatePostSp = (data) => {
+    return function (dispatch, getState) {
+        putApi(`/api/board/${data.boardid}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+};
 
 export default handleActions(
     {
-        [SET_POST]: (state, action) => produce(state, (draft) => {}),
+        [SET_POST]: (state, action) => produce(state, (draft) => {
+        }),
         [ADD_POST]: (state, action) =>
             produce(state, (draft) => {
                 draft.list.unshift(action.payload.post);
@@ -68,4 +112,4 @@ const actionCreators = {
     addPostSP,
 };
 
-export { actionCreators };
+export {actionCreators};

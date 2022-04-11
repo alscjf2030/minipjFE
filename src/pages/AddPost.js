@@ -1,55 +1,79 @@
-import React from "react";
+import React, {useState} from "react";
 
 import Grid from "../elements/Grid";
 import Text from "../elements/Text";
 import Image from "../elements/Image";
 import Button from "../elements/Button";
 import Upload from "../shared/Upload";
+import Input from "../elements/Input";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { actionCreators as postActions} from "../redux/modules/post";
+import {useSelector, useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {actionCreators as postActions} from "../redux/modules/post";
+
 
 const AddPost = (props) => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const is_login = useSelector((state) => state.user.userInfo.userId)
-    const preview = useSelector((state) => state.image.preview)
-    const post_list = useSelector((state) => state.post.post)
+    const is_login = useSelector((state) => state.user.userInfo.userId);
+    const post_list = useSelector((state) => state.post.post);
 
-    const [contents, setContents] = React.useState()
+    const [image, setImage] = useState()
+    const [content, setContent] = useState('');
+    const [title, setTitle] = useState('');
+    const [headinfo, setHeadinfo] = useState('');
+    const [topinfo, setTopinfo] = useState('');
+    const [bottominfo, setBottominfo] = useState('');
+    const [shoesinfo, setShoesinfo] = useState('');
 
     const changeContents = (e) => {
-        setContents(e.target.value)
-    }
-
-    const data = {
-        title : "제목입니다",
-        content : "반가워요",
-        userId : 1,
-        headinfo: "브랜드",
-        topinfo : "브랜드",
-        bottominfo : "브랜드",
-        shoseinfo : "브랜드",
-    }
+        setContent(e.target.value);
+    };
+    const changeTitle = (e) => {
+        setTitle(e.target.value);
+    };
+    const changeHead = (e) => {
+        setHeadinfo(e.target.value);
+    };
+    const changeTop = (e) => {
+        setTopinfo(e.target.value);
+    };
+    const changeBottom = (e) => {
+        setBottominfo(e.target.value);
+    };
+    const changeShoes = (e) => {
+        setShoesinfo(e.target.value);
+    };
 
     const addPost = () => {
-        dispatch(postActions.addPostSP(data, navigate))
-    }
+        dispatch(postActions.addPostSP(
+            {
+                title : "제목",
+                content : "내용",
+                headinfo : "모자",
+                topinfo : "상의",
+                bottominfo: "하의",
+                shoesinfo : "신발",
+                userId: 1,
+            },
+            image,
+            navigate
+        ));
+    };
 
     // 로그인 후에만 가능합니다.
-    if(!is_login){
-        return (
-            <div style={{display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column"}}>
-                <Text bold >회원만 이용이 가능합니다.</Text>
-                <Button onClick={() => {navigate("/", { replace : true })}}>돌아가기</Button>
-            </div>
-        )
-    }
+    // if(!is_login){
+    //     return (
+    //         <div style={{display: "flex",
+    //             justifyContent: "center",
+    //             alignItems: "center",
+    //             flexDirection: "column"}}>
+    //             <Text bold >회원만 이용이 가능합니다.</Text>
+    //             <Button onClick={() => {navigate("/", { replace : true })}}>돌아가기</Button>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div style={{position: "relative", margin: "auto", maxWidth: "80%"}}>
@@ -59,20 +83,23 @@ const AddPost = (props) => {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-                }}>
+                }}
+            >
                 <Text margin="auto" size="36px" bold>
                     게시글 작성
                 </Text>
             </div>
 
-            <div style={{
-                display: "flex",
-                flexDirection: "center",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "20px auto"
-            }}>
-                <Upload/>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "20px auto",
+                }}
+            >
+                <Upload image={image} setImage={setImage}/>
             </div>
 
             <Grid padding="16px">
@@ -89,40 +116,54 @@ const AddPost = (props) => {
                     </Text>
                 </div>
 
-                <div style={{
-                    display: "flex",
-                    flexDirection: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}>
-                    <Image
-                        width={'100%'}
-                        src={preview? preview : "img/logo.png"}
-                    />
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "center",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Image width={"50%"} src={image ? image : "img/logo.png"}/>
                 </div>
             </Grid>
 
             <div
                 style={{
                     display: "flex",
-                    flexDirection: "center",
+                    flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
             >
-        <textarea
-            onChange={changeContents}
-            type="text"
-            placeholder="게시글 작성"
-            cols="50"
-            rows="5"
-        />
+                <div style={{margin: "10px"}}>
+                    <input onChange={changeTitle} value={title} type="text" size="50" placeholder="게시글 제목"/>
+                </div>
+                <div style={{margin: "10px"}}>
+                    <input onChange={changeHead} value={headinfo} type="text" size="50" placeholder="모자 브랜드"/>
+                </div>
+                <div style={{margin: "10px"}}>
+                    <input onChange={changeTop} value={topinfo} type="text" size="50" placeholder="상의 브랜드"/>
+                </div>
+                <div style={{margin: "10px"}}>
+                    <input onChange={changeBottom} value={bottominfo} type="text" size="50" placeholder="하의 브랜드"/>
+                </div>
+                <div style={{margin: "10px"}}>
+                    <input onChange={changeShoes} value={shoesinfo} type="text" size="50" placeholder="신발 브랜드"/>
+                </div>
+                <textarea
+                    onChange={changeContents}
+                    type="text"
+                    placeholder="게시글 내용"
+                    cols="50"
+                    rows="5"
+                    value={content}
+                />
             </div>
 
             <Grid padding="16px">
                 <Button
                     onClick={() => {
-                        console.log("이거왜안돼");
                         addPost();
                         navigate("/");
                     }}

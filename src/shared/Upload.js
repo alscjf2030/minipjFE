@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Button from "../elements/Button";
 import {actionCreators as imageActions} from "../redux/modules/image";
 
-const Upload = (props) => {
+const Upload = ({image, setImage}) => {
 
     const dispatch = useDispatch()
     const fileInput = React.useRef()
@@ -25,8 +25,9 @@ const Upload = (props) => {
         reader.readAsDataURL(file);
 
         reader.onloadend = () => {
+            setImage(reader.result)
             // console.log(reader.result)
-            dispatch(imageActions.setPreview(reader.result))
+            // dispatch(imageActions.setPreview(reader.result))
         }
     }
 

@@ -16,6 +16,9 @@ const SignUp = () => {
   const [checkPw, setCheckPw] = useState();
 
   const signup = () => {
+    // if (userId) {
+    //   return window.alert("입력해라")
+    // }
     dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
     navigate("/login");
   };
