@@ -85,9 +85,9 @@ const DetailComments = (props) => {
             </Button>
             <Button
               bg={"#0D6EFD"}
-              visibility={
-                nickname === cur.userInfo.nickname ? "visible" : "hidden"
-              }
+              // visibility={
+              //   nickname === cur.userInfo.nickname ? "visible" : "hidden"
+              // }
               onClick={modalIsOpen}
             >
               수정
