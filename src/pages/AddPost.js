@@ -4,13 +4,41 @@ import Grid from "../elements/Grid";
 import Text from "../elements/Text";
 import Image from "../elements/Image";
 import Button from "../elements/Button";
+import Upload from "../shared/Upload";
+
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { actionCreators as postActions} from "../redux/modules/post";
 
 const AddPost = (props) => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const is_login = useSelector((state) => state.user.userInfo.userId)
+    const preview = useSelector((state) => state.image.preview)
+    const post_list = useSelector((state) => state.post.post)
 
     const [contents, setContents] = React.useState()
 
     const changeContents = (e) => {
         setContents(e.target.value)
+    }
+
+    const addPost = () => {
+        dispatch(postActions.addPostSP(contents, navigate))
+    }
+
+    // 로그인 후에만 가능합니다.
+    if(!is_login){
+        return (
+            <div style={{display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column"}}>
+                <Text bold >회원만 이용이 가능합니다.</Text>
+                <Button onClick={() => {navigate("/", { replace : true })}}>돌아가기</Button>
+            </div>
+        )
     }
 
     return (
@@ -31,7 +59,7 @@ const AddPost = (props) => {
                 alignItems: "center",
                 margin: "20px auto"
             }}>
-                <input type="file"/>
+                <Upload/>
             </div>
 
             <Grid padding="16px">
@@ -50,10 +78,11 @@ const AddPost = (props) => {
                     display: "flex",
                     flexDirection: "center",
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
                 }}>
                     <Image
-                        src="img/logo.png"
+                        width={'100%'}
+                        src={preview? preview : "img/logo.png"}
                     />
                 </div>
             </Grid>
@@ -67,7 +96,7 @@ const AddPost = (props) => {
             </div>
 
             <Grid padding="16px">
-                <Button text="게시글 작성"></Button>
+                <Button text="게시글 작성" onClick={addPost}></Button>
             </Grid>
         </div>
     );
@@ -76,3 +105,10 @@ const AddPost = (props) => {
 
 export default AddPost;
 
+//  title : "제목입니다",
+//  content : "반가워요",
+//  userId : “1”,
+//  headinfo: “브랜드”,
+//  topinfo : “브랜드”,
+//  bottominfo : “브랜드”,
+//  shoseinfo : “브랜드”

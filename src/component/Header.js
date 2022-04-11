@@ -40,6 +40,7 @@ const Header = () => {
               width={"100px"}
               height={"100px"}
               bor_radius
+              onClick={() => {navigate("/")}}
           >
             로고
           </Image>
@@ -82,6 +83,7 @@ const Header = () => {
             width={"100px"}
             height={"100px"}
             bor_radius
+            onClick={() => {navigate("/")}}
         >
           로고
         </Image>

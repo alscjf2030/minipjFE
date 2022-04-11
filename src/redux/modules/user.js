@@ -1,7 +1,7 @@
-import { createAction, handleActions } from "redux-actions";
+import {createAction, handleActions} from "redux-actions";
 import produce from "immer";
-import axios from "axios";
 import jwt_decode from "jwt-decode";
+import {getApi, postApi, setClient} from "../../api/client";
 
 
 // 액션 타입
@@ -21,8 +21,7 @@ const initialState = {
 // 미들 웨어
 const SignUpSP = (userId, nickname, pw, checkPw) => {
   return function (dispatch, getState) {
-    axios
-      .post("http://52.79.228.83:8080/user/signup", {
+      postApi("/user/signup", {
         username: userId,
         nickname: nickname,
         password: pw,
@@ -37,10 +36,9 @@ const SignUpSP = (userId, nickname, pw, checkPw) => {
 
 const LoginSP = (userId, pw) => {
   return function (dispatch, getState) {
-    axios
-      .post("http://52.79.228.83:8080/user/login", {
-        username: userId,
-        password: pw,
+      postApi("/user/login", {
+          username: userId,
+          password: pw,
       })
       .then((res) => {
         const token = res.headers.authorization.split(" ")[1];
@@ -51,6 +49,7 @@ const LoginSP = (userId, pw) => {
         const nickname = JSON.parse(atob(token.split(".")[1])).NICKNAME;
         const userId = JSON.parse(atob(token.split(".")[1])).USER_ID;
         sessionStorage.setItem("jwt_token", token);
+        setClient(token)
         dispatch(
           logIn({
             useremail: useremail,
@@ -79,17 +78,13 @@ const LoginCheckSP = (token) => {
   };
 };
 
-const LogOutSP = (token) => {
+const LogOutSP = () => {
   return function (dispatch) {
-    axios
-      .get("http://52.79.228.83:8080/user/logout", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      getApi("/user/logout")
       .then((res) => {
         console.log(res);
         sessionStorage.removeItem("jwt_token");
+        setClient('')
         dispatch(logOut());
       })
       .catch((err) => {
@@ -100,17 +95,17 @@ const LogOutSP = (token) => {
 
 // 리듀서
 export default handleActions(
-  {
-    [LOGIN]: (state, action) =>
-      produce(state, (draft) => {
-        draft.userInfo = action.payload.userInfo;
-      }),
-    [LOGOUT]: (state, action) =>
-      produce(state, (draft) => {
-        draft.userInfo = {};
-      }),
-  },
-  initialState
+    {
+        [LOGIN]: (state, action) =>
+            produce(state, (draft) => {
+                draft.userInfo = action.payload.userInfo;
+            }),
+        [LOGOUT]: (state, action) =>
+            produce(state, (draft) => {
+                draft.userInfo = {};
+            }),
+    },
+    initialState
 );
 
 const actionCreators = {

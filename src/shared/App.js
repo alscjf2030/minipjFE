@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 import Login from "../pages/Login";
@@ -7,28 +7,30 @@ import SignUp from "../pages/SignUp";
 import Main from "../pages/Main";
 import Detail from "../pages/Detail";
 import AddPost from "../pages/AddPost";
-import Button from "../elements/Button";
 
 import Header from "../component/Header";
-import AddComments from "./../component/AddComments";
-import DetailComments from "../component/DetailComments";
+import {useEffect} from "react";
+import {setClient} from "../api/client";
 
 function App() {
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('jwt_token')
+        if ( token ) {
+            setClient(token)
+        }
+    }, [])
+
     return (
         <MainContainer>
-            <BrowserRouter>
                 <Header/>
-                {/*<div style={{display:"flex", float: "right"}}>*/}
-                {/*    <Button>로그인시 글쓰기</Button>*/}
-                {/*</div>*/}
                 <Routes>
                     <Route path="/" element={<Main/>} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/detail" element={<Detail/>}/>
+                    <Route path="/detail/:id" element={<Detail/>}/>
                     <Route path="/write" element={<AddPost/>}/>
                 </Routes>
-            </BrowserRouter>
             <GlobalStyle/>
         </MainContainer>
     );
