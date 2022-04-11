@@ -68,6 +68,7 @@ const DetailComments = (props) => {
           </Grid>
           <Grid is_flex>
             <Button
+              bg={"#0D6EFD"}
               visibility={
                 nickname === cur.userInfo.nickname ? "visible" : "hidden"
               }
@@ -83,9 +84,10 @@ const DetailComments = (props) => {
               삭제
             </Button>
             <Button
-              // visibility={
-              //   nickname === cur.userInfo.nickname ? "visible" : "hidden"
-              // }
+              bg={"#0D6EFD"}
+              visibility={
+                nickname === cur.userInfo.nickname ? "visible" : "hidden"
+              }
               onClick={modalIsOpen}
             >
               수정
@@ -123,6 +125,7 @@ const DetailComments = (props) => {
             </Grid>
             <Grid is_flex width={"300px"} margin={"0 auto"}>
               <Button
+                bg={"#0D6EFD"}
                 onClick={() => {
                   dispatch(
                     commentActions.updateCommentSP(
@@ -142,6 +145,7 @@ const DetailComments = (props) => {
                 수정
               </Button>
               <Button
+                bg={"#0D6EFD"}
                 onClick={() => {
                   setIsOpen(false);
                 }}

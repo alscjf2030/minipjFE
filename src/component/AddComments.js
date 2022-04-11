@@ -52,7 +52,7 @@ const AddComments = () => {
           setComment(e.target.value);
         }}
       ></PostInput>
-      <Button onClick={addComment} >
+      <Button bg={"#0D6EFD"} onClick={addComment}>
         작성하기
       </Button>
     </div>
