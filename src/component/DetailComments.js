@@ -5,33 +5,33 @@ import PostInput from "../elements/PostInput";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
+import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const DetailComments = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [upComment, setUpComment] = useState();
-  const dispatch = useDispatch();
   // const comment = useSelector((state) => state.comment.comment);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem("jwt_token");
+  const nickname = () => {
+    if (token) {
+      return JSON.parse(atob(token.split(".")[1])).NICKNAME;
+    }
+  };
+
   const comment = [
     {
-      userInfo: {
-        nickname: "kop",
-        userId: 1,
-      },
-      boardId: 1,
-      comment: "와아아아ㅏ아",
+      userInfo: { nickname: "kop" },
       id: 1,
-    },
-    {
-      userInfo: {
-        nickname: "kop",
-        userId: 1,
-      },
+      comment: "너무 고민인데?",
+      commentId: 1,
+      userId: 1,
       boardId: 1,
-      comment: "와아아아ㅏ아",
-      id: 1,
     },
   ];
-  // const token = sessionStorage;
+
   const modalIsOpen = () => {
     setIsOpen(true);
   };
@@ -40,7 +40,6 @@ const DetailComments = (props) => {
     dispatch(
       commentActions.getCommentSP(1, sessionStorage.getItem("jwt_token"))
     );
-    console.log("실행되니");
   }, []);
 
   return (
@@ -62,6 +61,9 @@ const DetailComments = (props) => {
           </Grid>
           <Grid is_flex>
             <Button
+              visibility={
+                nickname === cur.userInfo.nickname ? "visible" : "hidden"
+              }
               onClick={() => {
                 dispatch(
                   commentActions.deleteCommentSP(
@@ -73,7 +75,14 @@ const DetailComments = (props) => {
             >
               삭제
             </Button>
-            <Button onClick={modalIsOpen}>수정</Button>
+            <Button
+              visibility={
+                nickname === cur.userInfo.nickname ? "visible" : "hidden"
+              }
+              onClick={modalIsOpen}
+            >
+              수정
+            </Button>
           </Grid>
           <Modal
             isOpen={isOpen}
@@ -109,13 +118,18 @@ const DetailComments = (props) => {
               <Button
                 onClick={() => {
                   dispatch(
-                    commentActions.updateCommentSP({
-                      userId: cur.userInfo.userId,
-                      boardId: cur.boardId,
-                      comment: upComment,
-                      commentId: cur.id,
-                    })
+                    commentActions.updateCommentSP(
+                      {
+                        userId: cur.userId,
+                        boardId: cur.boardId,
+                        comment: upComment,
+                        commentId: cur.id,
+                      },
+                      sessionStorage.getItem("jwt_token")
+                    )
                   );
+                  setIsOpen(false);
+                  navigate("/detail");
                 }}
               >
                 수정

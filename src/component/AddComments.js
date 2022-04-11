@@ -4,9 +4,11 @@ import PostInput from "../elements/PostInput";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
 import { actionCreators as commentActions } from "../redux/modules/comment";
+import { useNavigate } from "react-router-dom";
 
 const AddComments = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userinfo = useSelector((state) => state.user.userInfo);
   console.log(userinfo);
 
@@ -26,6 +28,7 @@ const AddComments = () => {
     dispatch(
       commentActions.addCommentSP(info, sessionStorage.getItem("jwt_token"))
     );
+    navigate("/detail");
   };
 
   return (
@@ -49,7 +52,9 @@ const AddComments = () => {
           setComment(e.target.value);
         }}
       ></PostInput>
-      <Button onClick={addComment}>작성하기</Button>
+      <Button onClick={addComment} >
+        작성하기
+      </Button>
     </div>
   );
 };
