@@ -11,6 +11,8 @@ const Button = (props) => {
     fontSize,
     text,
     visibility,
+    bg,
+    color,
   } = props;
   const styles = {
     margin: margin,
@@ -18,6 +20,8 @@ const Button = (props) => {
     height: height,
     fontSize: fontSize,
     visibility: visibility,
+    bg: bg,
+    color: color,
   };
   return (
     <Btn onClick={onClick} {...styles}>
@@ -39,7 +43,7 @@ Button.defaultProps = {
 const Btn = styled.div`
   border-radius: 5px;
   box-sizing: border-box;
-  background-color: black;
+  background-color: ${(props) => (props.bg ? props.bg : "black")};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
@@ -47,7 +51,7 @@ const Btn = styled.div`
   text-align: center;
   line-height: ${(props) => props.height};
   visibility: ${(props) => props.visibility};
-  color: #ffffff;
+  color: ${(props) => (props.color ? props.color : "#fff")};
   &:hover {
     cursor: pointer;
     border: 1px solid slateblue;
