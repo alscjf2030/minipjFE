@@ -8,9 +8,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 const CmtModal = (props) => {
-  const { isOpen, nickname, boardId, userId, children } = props;
+  const { isOpen, commentInfo } = props;
   const dispatch = useDispatch();
-  console.log(children);
+  console.log(commentInfo);
   return (
     <>
       <Modal
@@ -32,12 +32,12 @@ const CmtModal = (props) => {
           margin={"60px auto -20px auto"}
         >
           <PostInput
-            defaultValue={children}
+            defaultValue={commentInfo?.comment}
             width={"600px"}
             height={"80px"}
             margin={"auto"}
           >
-            nickname
+            {commentInfo?.userInfo?.nickname}
           </PostInput>
         </Grid>
         <Grid is_flex width={"300px"} margin={"0 auto"}>

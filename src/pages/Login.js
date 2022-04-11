@@ -19,12 +19,13 @@ const Login = () => {
 
   return (
     <Grid
-      width={"600px"}
+      width={"660px"}
       border={"2px solid #0D6EFD"}
       margin={"200px auto"}
+      height={"600px"}
       bor_radius
     >
-      <Grid width={"250px"} margin={"50px auto"}>
+      <Grid width={"250px"} margin={"127.5px auto"}>
         <Grid width={"250px"} margin={"25px auto"}>
           <p>아이디</p>
           <Input
