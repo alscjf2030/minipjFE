@@ -5,7 +5,6 @@ import PostInput from "../elements/PostInput";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
-import { Navigate } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 const DetailComments = (props) => {

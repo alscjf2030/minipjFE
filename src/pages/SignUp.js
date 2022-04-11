@@ -23,7 +23,7 @@ const SignUp = () => {
   return (
     <Grid
       width={"660px"}
-      border={"2px solid black"}
+      border={"2px solid #0D6EFD"}
       margin={"200px auto"}
       height={"600px"}
       bor_radius
@@ -62,7 +62,7 @@ const SignUp = () => {
           ></Input>
         </Grid>
       </Grid>
-      <Button width={"55%"} margin={"0px auto"} onClick={signup}>
+      <Button bg={"#0D6EFD"} width={"55%"} margin={"0px auto"} onClick={signup}>
         회원가입
       </Button>
     </Grid>

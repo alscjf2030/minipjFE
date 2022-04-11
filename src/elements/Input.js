@@ -11,6 +11,7 @@ const TextInput = styled.input`
   outline: none;
   border: none;
   border-bottom: 1px solid black;
+  font-size: 1.2em;
   width: ${(props) => props.width};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}

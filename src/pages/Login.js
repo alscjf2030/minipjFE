@@ -18,28 +18,42 @@ const Login = () => {
   };
 
   return (
-    <Grid width={"600px"} border={"1px solid black"} margin={"200px auto"}>
-      <Grid width={"250px"} border={"1px solid black"} margin={"0px auto"}>
-        <Grid>
-          아이디:
+    <Grid
+      width={"600px"}
+      border={"2px solid #0D6EFD"}
+      margin={"200px auto"}
+      bor_radius
+    >
+      <Grid width={"250px"} margin={"50px auto"}>
+        <Grid width={"250px"} margin={"25px auto"}>
+          <p>아이디</p>
           <Input
+            width={"250px"}
             onChange={(e) => {
               setUserID(e.target.value);
             }}
           ></Input>
         </Grid>
-        <Grid>
-          비밀번호:
+        <Grid width={"250px"} margin={"25px auto"}>
+          <p>비밀번호</p>
           <Input
+            width={"250px"}
             onChange={(e) => {
               setPw(e.target.value);
             }}
           ></Input>
         </Grid>
       </Grid>
-      <Grid border={"1px solid black"} width={"250px"} margin={"10px auto"}>
-        <Button>회원가입</Button>
-        <Button onClick={login}>로그인</Button>
+      <Grid
+        is_flex
+        // border={"1px solid black"}
+        width={"250px"}
+        margin={"-50px auto 5px auto"}
+      >
+        <Button bg={"#0D6EFD"}>회원가입</Button>
+        <Button bg={"#0D6EFD"} onClick={login}>
+          로그인
+        </Button>
       </Grid>
     </Grid>
   );

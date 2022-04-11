@@ -5,6 +5,8 @@ import Grid from "../elements/Grid";
 import Button from "../elements/Button";
 import Image from "../elements/Image";
 import { actionCreators as userActions } from "../redux/modules/user";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 const Header = () => {
   const navigate = useNavigate();
