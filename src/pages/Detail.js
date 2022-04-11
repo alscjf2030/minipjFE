@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import Grid from "../elements/Grid";
 import Image from "../elements/Image";
@@ -7,7 +7,6 @@ import DetailComments from "../component/DetailComments";
 
 
 const Detail = (props) => {
-
     return (
         <Grid >
             <DetailContents/>

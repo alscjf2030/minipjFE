@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import user from "./modules/user";
 import comment from "./modules/comment";
 import post from "./modules/post";
+import image from "./modules/image";
 
 const rootReducer = combineReducers({
   user: user,
   comment: comment,
-  post: post
+  post: post,
+  image: image
 });
 
 const middlewares = [thunk];

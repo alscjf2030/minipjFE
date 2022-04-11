@@ -7,6 +7,11 @@ const Image = (props) => {
   return <Img src={src} {...styles} onClick={onClick}></Img>;
 };
 
+Image.defualtProps = {
+  onClick: () => {}
+}
+
+
 const Img = styled.img`
   width: ${(props) => props.width};
   height: ${(props) => props.height};

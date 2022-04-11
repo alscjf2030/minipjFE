@@ -8,30 +8,36 @@ import SignUp from "../pages/SignUp";
 import Main from "../pages/Main";
 import Detail from "../pages/Detail";
 import AddPost from "../pages/AddPost";
-import Button from "../elements/Button";
-import Grid from "../elements/Grid";
 
 import Header from "../component/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
-function App() {
-  return (
-    <MainContainer>
+import {useEffect} from "react";
+import {setClient} from "../api/client";
 
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/detail" element={<Detail />} />
-          <Route path="/write" element={<AddPost />} />
-        </Routes>
-      </BrowserRouter>
-      <GlobalStyle />
-    </MainContainer>
-  );
+function App() {
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('jwt_token')
+        if ( token ) {
+            setClient(token)
+        }
+    }, [])
+
+    return (
+        <MainContainer>
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/detail/:id" element={<Detail />}/>
+                    <Route path="/write" element={<AddPost />}/>
+                </Routes>
+            <GlobalStyle/>
+        </MainContainer>
+    );
 }
 
 Modal.setAppElement("#root");

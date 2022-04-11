@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import MainPost from "../component/MainPost";
 
@@ -12,22 +12,26 @@ const ContentsList = (props) => {
     console.log(post_list)
 
     return (
-        <>
+        <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center"}}>
             {post_list.map((p, idx) => {
                 return <MainPost key={p.id} {...p}/>
             })}
-            <Grid>
-                <Grid>작성자 / 시간</Grid>
+            <div>
+                <div>작성자 / 시간</div>
 
-                <Grid>제목</Grid>
+                <div>제목</div>
 
                 <Image
                     src="img/logo.png"
                 ></Image>
 
-                <Grid>게시글 내용</Grid>
-            </Grid>
-        </>
+                <div>게시글 내용</div>
+            </div>
+        </div>
     )
 }
 

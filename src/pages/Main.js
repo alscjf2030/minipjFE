@@ -1,17 +1,27 @@
 import React from "react";
 import Grid from "../elements/Grid";
 import ContentsList from "./ContentsList";
+import Permit from "../shared/Permit";
+import Button from "../elements/Button";
+import {useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Main = () => {
-  const post = useSelector((state) => state.post.list);
-  console.log(post);
-  return (
-    <Grid width={"80%"} margin={"0 auto"}>
-      {post}
-      <ContentsList />
-    </Grid>
-  );
+    const navigate = useNavigate()
+
+    const post = useSelector((state) => state.post.list);
+    console.log(post);
+    return (
+        <Grid width={"80%"} margin={"0 auto"}>
+            <ContentsList/>
+
+            <div style={{display:"flex", float: "right"}}>
+                <Permit>
+                    <Button onClick={() => {navigate("/write")}}>글쓰기</Button>
+                </Permit>
+            </div>
+        </Grid>
+    );
 };
 
 export default Main;
