@@ -46,38 +46,63 @@ const SignUp = () => {
       <Grid
         width={"100%"}
         border={"px solid black"}
-        margin={"120px auto 40px auto"}
+        margin={"100px auto 100px auto"}
       >
-        <Grid>
-          아이디
+        <Grid
+          width={"300px"}
+          // border={"1px solid black"}
+          height={"30px"}
+          margin={"50px auto"}
+        >
+          <p>아이디</p>
           <Input
-            width={"220px"}
+            width={"300px"}
             onChange={(e) => setUserID(e.target.value)}
           ></Input>
         </Grid>
-        <Grid>
-          닉네임
+        <Grid
+          width={"300px"}
+          // border={"1px solid black"}
+          height={"30px"}
+          margin={"50px auto"}
+        >
+          <p>닉네임</p>
           <Input
-            width={"220px"}
+            width={"300px"}
             onChange={(e) => setNickname(e.target.value)}
           ></Input>
         </Grid>
-        <Grid>
-          비밀번호
+        <Grid
+          width={"300px"}
+          // border={"1px solid black"}
+          height={"30px"}
+          margin={"50px auto"}
+        >
+          <p>비밀번호</p>
           <Input
-            width={"220px"}
+            width={"300px"}
             onChange={(e) => setPw(e.target.value)}
           ></Input>
         </Grid>
-        <Grid>
-          확인비밀번호
+        <Grid
+          width={"300px"}
+          // border={"1px solid black"}
+          height={"30px"}
+          margin={"50px auto"}
+        >
+          <p>비밀번호확인</p>
           <Input
-            width={"220px"}
+            width={"300px"}
             onChange={(e) => setCheckPw(e.target.value)}
           ></Input>
         </Grid>
       </Grid>
-      <Button bg={"#0D6EFD"} width={"55%"} margin={"0px auto"} onClick={signup}>
+      <Button
+        bg={"#0D6EFD"}
+        width={"55%"}
+        margin={"50px auto"}
+        onClick={signup}
+      >
         회원가입
       </Button>
     </Grid>

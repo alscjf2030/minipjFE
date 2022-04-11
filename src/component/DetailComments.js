@@ -90,14 +90,18 @@ const DetailComments = (props) => {
               // visibility={
               //   nickname === cur.userInfo.nickname ? "visible" : "hidden"
               // }
-              onClick={(() => setUpComment(cur.comment), modalIsOpen)}
+              onClick={() => {
+                setUpComment(cur);
+                setIsOpen(true);
+              }}
             >
               수정
             </Button>
           </Grid>
         </Grid>
       ))}
-      <CmtModal isOpen={isOpen}>{upComment}</CmtModal>
+      {console.log(upComment)}
+      <CmtModal isOpen={isOpen} commentInfo={upComment}></CmtModal>
     </>
   );
 };
