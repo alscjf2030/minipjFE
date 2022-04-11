@@ -2,17 +2,27 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { children, onClick, margin, width, height, fontSize, text } = props;
+  const {
+    children,
+    onClick,
+    margin,
+    width,
+    height,
+    fontSize,
+    text,
+    visibility,
+  } = props;
   const styles = {
     margin: margin,
     width: width,
     height: height,
     fontSize: fontSize,
+    visibility: visibility,
   };
   return (
-      <Btn onClick={onClick} {...styles}>
-        {text ? text : children}
-      </Btn>
+    <Btn onClick={onClick} {...styles}>
+      {text ? text : children}
+    </Btn>
   );
 };
 
@@ -23,6 +33,7 @@ Button.defaultProps = {
   margin: "50px auto",
   width: "120px",
   lineHeight: "50px",
+  visibility: "visible",
 };
 
 const Btn = styled.div`
@@ -35,6 +46,7 @@ const Btn = styled.div`
   font-size: ${(props) => props.fontSize};
   text-align: center;
   line-height: ${(props) => props.height};
+  visibility: ${(props) => props.visibility};
   color: #ffffff;
   &:hover {
     cursor: pointer;

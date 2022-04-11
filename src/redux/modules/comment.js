@@ -36,7 +36,7 @@ const addCommentSP = (userinfo, token) => {
       )
       .then((res) => {
         console.log(res);
-        dispatch(addComment(userinfo));
+        // dispatch(addComment(userinfo));
       })
       .catch((err) => console.log(err));
   };
@@ -80,7 +80,7 @@ const deleteCommentSP = (commentInfo, token) => {
 
 const updateCommentSP = (commentInfo, token) => {
   return function (dispatch) {
-    console.log(commentInfo);
+    console.log(token);
     axios
       .put(
         `http://52.79.228.83:8080/api/comment/${commentInfo.commentId}`,
