@@ -6,6 +6,7 @@ import Input from "../elements/Input";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { emailCheck, pwCheck } from "../shared/ValidCheck";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,13 +17,24 @@ const SignUp = () => {
   const [checkPw, setCheckPw] = useState();
 
   const signup = () => {
-    // if (userId) {
-    //   return window.alert("입력해라")
-    // }
-    dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
-    navigate("/login");
+    if (!userId || !nickname || !pw || !checkPw) {
+      return window.alert("공백을 채워주세요");
+    }
+    if (!emailCheck.test(userId)) {
+      return window.alert("지켜라");
+    }
+    if (!pwCheck.test(pw)) {
+      return window.alert("지키라고");
+    }
+    if (pw !== pwCheck) {
+      return window.alert("어허 끝까지 안지키네");
+    } else {
+      dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
+      navigate("/login");
+    }
   };
 
+  console.log(Boolean(userId));
   return (
     <Grid
       width={"660px"}

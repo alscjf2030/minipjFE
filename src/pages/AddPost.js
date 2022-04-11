@@ -19,7 +19,7 @@ const AddPost = (props) => {
   const post_list = useSelector((state) => state.post.post);
 
   const [contents, setContents] = React.useState();
-
+  const token = sessionStorage.getItem("jwt_token");
   const changeContents = (e) => {
     setContents(e.target.value);
   };
@@ -35,7 +35,7 @@ const AddPost = (props) => {
   };
 
   const addPost = () => {
-    dispatch(postActions.addPostSP(data, navigate));
+    dispatch(postActions.addPostSP(data, token));
   };
 
   // 로그인 후에만 가능합니다.
