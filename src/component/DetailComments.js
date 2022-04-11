@@ -29,6 +29,14 @@ const DetailComments = (props) => {
       userId: 1,
       boardId: 1,
     },
+    {
+      userInfo: { nickname: "kop" },
+      id: 2,
+      comment: "어허",
+      commentId: 1,
+      userId: 1,
+      boardId: 1,
+    },
   ];
 
   const modalIsOpen = () => {
@@ -75,9 +83,9 @@ const DetailComments = (props) => {
               삭제
             </Button>
             <Button
-              visibility={
-                nickname === cur.userInfo.nickname ? "visible" : "hidden"
-              }
+              // visibility={
+              //   nickname === cur.userInfo.nickname ? "visible" : "hidden"
+              // }
               onClick={modalIsOpen}
             >
               수정
