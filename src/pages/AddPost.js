@@ -24,8 +24,18 @@ const AddPost = (props) => {
         setContents(e.target.value)
     }
 
+    const data = {
+        title : "제목입니다",
+        content : "반가워요",
+        userId : 1,
+        headinfo: "브랜드",
+        topinfo : "브랜드",
+        bottominfo : "브랜드",
+        shoseinfo : "브랜드",
+    }
+
     const addPost = () => {
-        dispatch(postActions.addPostSP(contents, navigate))
+        dispatch(postActions.addPostSP(data, navigate))
     }
 
     // 로그인 후에만 가능합니다.
@@ -113,11 +123,12 @@ const AddPost = (props) => {
                 <Button
                     onClick={() => {
                         console.log("이거왜안돼");
-                        dispatch(postActions.addPost(contents));
+                        addPost();
                         navigate("/");
                     }}
                     text="게시글 작성"
-                ></Button>
+                >
+                </Button>
             </Grid>
         </div>
     );

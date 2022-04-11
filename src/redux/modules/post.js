@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
-import {postApi} from "../../api/client";
+import {deleteApi, postApi, putApi} from "../../api/client";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -32,13 +32,14 @@ const addPostSP = (data, navigate) => {
 
         const _image = getState().image.preview;
 
+
         postApi("/api/board/regist", {
             title : data.title,
             content : data.content,
             userId : data.userId
         })
             .then((res) => {
-                dispatch(addPost())
+                dispatch(addPost(data))
                 navigate('/', { replace : true })
                 console.log(res);
             })
@@ -48,6 +49,7 @@ const addPostSP = (data, navigate) => {
             });
     }
 }
+
 
 export default handleActions(
     {

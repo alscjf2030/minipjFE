@@ -11,25 +11,25 @@ import {getApi} from "../api/client";
 
 const DetailContents = (props) => {
     const { user_name, insert_dt } = props;
-    const params = useParams()
-    const {id} = params
-    const [data, setData] = useState()
-    useEffect(() => {
-        if (id) {
-            getApi(`/api/board/detail/${id}`)
-                .then((res) => {
-                    if (res.status === 200) {
-                        setData(res.data)
-                    }
-                }).catch((err) => {
-                    console.error(err)
-                })
-        }
-    }, [])
-
-    if (!data) {
-        return <div>Loading...</div>
-    }
+    // const params = useParams()
+    // const {id} = params
+    // const [data, setData] = useState()
+    // useEffect(() => {
+    //     if (id) {
+    //         getApi(`/api/board/detail/${id}`)
+    //             .then((res) => {
+    //                 if (res.status === 200) {
+    //                     setData(res.data)
+    //                 }
+    //             }).catch((err) => {
+    //                 console.error(err)
+    //             })
+    //     }
+    // }, [])
+    //
+    // if (!data) {
+    //     return <div>Loading...</div>
+    // }
 
     return (
         <HeadLine>
