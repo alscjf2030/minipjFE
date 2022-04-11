@@ -43,10 +43,13 @@ const AddPost = (props) => {
 
     return (
         <div style={{position: "relative", margin: "auto", maxWidth: "80%"}}>
-            <div style={{display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column"}}>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                }}>
                 <Text margin="auto" size="36px" bold>
                     게시글 작성
                 </Text>
@@ -63,12 +66,14 @@ const AddPost = (props) => {
             </div>
 
             <Grid padding="16px">
-                <div style={{
-                    display: "flex",
-                    flexDirection: "center",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "center",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
                     <Text margin="0px" size="24px" bold>
                         미리보기
                     </Text>
@@ -87,28 +92,35 @@ const AddPost = (props) => {
                 </div>
             </Grid>
 
-            <div style={{
-                display: "flex",
-                flexDirection: "center",
-                justifyContent: "center",
-                alignItems: "center"}}>
-                <textarea onChange={changeContents} type="text" placeholder="게시글 작성" cols="50" rows="5"/>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+        <textarea
+            onChange={changeContents}
+            type="text"
+            placeholder="게시글 작성"
+            cols="50"
+            rows="5"
+        />
             </div>
 
             <Grid padding="16px">
-                <Button text="게시글 작성" onClick={addPost}></Button>
+                <Button
+                    onClick={() => {
+                        console.log("이거왜안돼");
+                        dispatch(postActions.addPost(contents));
+                        navigate("/");
+                    }}
+                    text="게시글 작성"
+                ></Button>
             </Grid>
         </div>
     );
-}
-
+};
 
 export default AddPost;
-
-//  title : "제목입니다",
-//  content : "반가워요",
-//  userId : “1”,
-//  headinfo: “브랜드”,
-//  topinfo : “브랜드”,
-//  bottominfo : “브랜드”,
-//  shoseinfo : “브랜드”

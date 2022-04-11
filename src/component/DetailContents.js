@@ -10,7 +10,7 @@ import {useParams} from "react-router";
 import {getApi} from "../api/client";
 
 const DetailContents = (props) => {
-    const {user_name, insert_dt} = props;
+    const { user_name, insert_dt } = props;
     const params = useParams()
     const {id} = params
     const [data, setData] = useState()
@@ -33,8 +33,8 @@ const DetailContents = (props) => {
 
     return (
         <HeadLine>
-            <div style={{display: "flex", justifyContent: "space-between"}}>
-                <div style={{display: "flex"}}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{ display: "flex" }}>
                     <Text>{user_name}</Text>
                     <Text>{insert_dt}</Text>
                 </div>
@@ -45,31 +45,34 @@ const DetailContents = (props) => {
             </div>
 
             <div>
-                <div style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center"
-                }}>
-                    <Image src="img/logo.png"/>
-                    <div style={{
-                        width: "50%",
-                        textAlign: "center"
-                    }}>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <Image src="img/logo.png" />
+                    <div
+                        style={{
+                            width: "50%",
+                            textAlign: "center",
+                        }}
+                    >
                         <Text>상세 페이지 내용</Text>
                     </div>
                 </div>
-                <div style={{margin: "auto"}}>
+                <div style={{ margin: "auto" }}>
                     <Grid padding="16px">
-                        <AddComments/>
-                        <DetailComments/>
+                        <AddComments />
+                        <DetailComments />
                     </Grid>
                 </div>
             </div>
         </HeadLine>
-
-    )
-}
+    );
+};
 
 DetailContents.defaultProps = {
     user_profile: "",
@@ -77,13 +80,13 @@ DetailContents.defaultProps = {
     user_id: "",
     post_id: 1,
     contents: "여기에 댓글이 입력됩니다.",
-    insert_dt: '2021-01-01'
-}
+    insert_dt: "2021-01-01",
+};
 
-export default DetailContents
+export default DetailContents;
 
 const HeadLine = styled.div`
   position: relative;
   margin: auto;
   max-width: 80%;
-`
+`;
