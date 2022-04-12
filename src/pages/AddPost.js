@@ -70,7 +70,7 @@ const AddPost = (props) => {
     //             alignItems: "center",
     //             flexDirection: "column"}}>
     //             <Text bold >회원만 이용이 가능합니다.</Text>
-    //             <Button onClick={() => {navigate("/", { replace : true })}}>돌아가기</Button>
+    //             <Button onClick={() => {navigate("/")}}>돌아가기</Button>
     //         </div>
     //     )
     // }

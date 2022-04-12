@@ -16,7 +16,7 @@ const Upload = ({image, setImage}) => {
         // console.log(e.target)
         // console.log(e.target.files[0])
 
-        console.log(fileInput.current.files[0])
+        // console.log(fileInput.current.files[0])
 
         // 업로드 파일 미리보기
         const reader = new FileReader();
