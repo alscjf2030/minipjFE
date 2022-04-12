@@ -26,7 +26,7 @@ const Upload = ({image, setImage}) => {
 
         reader.onloadend = () => {
             setImage(reader.result)
-            // console.log(reader.result)
+            console.log(reader.result)
             // dispatch(imageActions.setPreview(reader.result))
         }
     }

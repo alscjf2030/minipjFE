@@ -98,7 +98,7 @@ const AddPost = (props) => {
                     margin: "20px auto",
                 }}
             >
-                <Upload image={image} setImage={setImage}/>
+                <Upload image={image} setImage={setImage} />
             </div>
 
             <Grid padding="16px">

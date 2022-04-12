@@ -61,7 +61,6 @@ const initialPost = {
 const addPostSP = (data, token) => {
   console.log(data);
   return function (dispatch, getState) {
-    const _image = getState().image.preview;
 
     axios
       .post(
@@ -84,7 +83,7 @@ const addPostSP = (data, token) => {
       .then((res) => {
         console.log(res);
         // dispatch(addPost(data));
-        // navigate("/", { replace: true });
+        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
