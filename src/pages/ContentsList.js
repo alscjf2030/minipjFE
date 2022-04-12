@@ -18,16 +18,14 @@ const ContentsList = (props) => {
             justifyContent: "center",
             alignItems: "center"}}>
             {post_list.map((p, idx) => {
-                return <MainPost key={p.id} {...p}/>
+                return <MainPost key={p.boardId} {...p}/>
             })}
             <div>
                 <div>작성자 / 시간</div>
 
                 <div>제목</div>
 
-                <Image
-                    src="img/logo.png"
-                ></Image>
+                <Image src="img/logo.png"/>
 
                 <div>게시글 내용</div>
             </div>

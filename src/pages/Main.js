@@ -4,13 +4,11 @@ import ContentsList from "./ContentsList";
 import Permit from "../shared/Permit";
 import Button from "../elements/Button";
 import {useNavigate} from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const Main = () => {
     const navigate = useNavigate()
 
-    const post = useSelector((state) => state.post.list);
-    console.log(post);
+
     return (
         <Grid width={"80%"} margin={"0 auto"}>
             <ContentsList/>

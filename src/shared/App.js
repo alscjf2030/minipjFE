@@ -17,19 +17,19 @@ import { useEffect } from "react";
 import { setClient } from "../api/client";
 
 function App() {
-  return (
-    <MainContainer>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/detail/" element={<Detail />} />
-        <Route path="/write" element={<AddPost />} />
-      </Routes>
-      <GlobalStyle />
-    </MainContainer>
-  );
+    return (
+        <MainContainer>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/detail/" element={<Detail />} />
+                <Route path="/write" element={<AddPost />} />
+            </Routes>
+            <GlobalStyle />
+        </MainContainer>
+    );
 }
 
 Modal.setAppElement("#root");
