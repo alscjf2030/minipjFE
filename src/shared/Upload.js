@@ -11,31 +11,30 @@ const Upload = ({ image, setImage }) => {
   const is_uploading = useSelector((state) => state.image.uploading);
 
   const selectFile = (e) => {
-    // console.log(e)
+    console.log(e.target.files[0]);
     // console.log(e.target)
     // console.log(e.target.files[0])
 
     // 업로드 파일 미리보기
     const reader = new FileReader();
     const file = fileInput.current.files[0];
+    setImage(file);
     reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-      setImage(reader.result);
-      //   console.log(reader.result);
-      // dispatch(imageActions.setPreview(reader.result))
-    };
+    // console.log(file);
+    // reader.onloadend = () => {
+    //   setImage(reader.result);
+    //   //   console.log(reader.result);
+    //   // dispatch(imageActions.setPreview(reader.result))
+    // };
   };
 
   return (
-    <form>
-      <input
-        type="file"
-        onChange={selectFile}
-        ref={fileInput}
-        disabled={is_uploading}
-      />
-    </form>
+    <input
+      type="file"
+      onChange={selectFile}
+      ref={fileInput}
+      disabled={is_uploading}
+    />
   );
 };
 

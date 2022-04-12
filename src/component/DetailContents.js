@@ -6,41 +6,33 @@ import Image from "../elements/Image";
 import Text from "../elements/Text";
 import DetailComments from "./DetailComments";
 import AddComments from "./AddComments";
-import { useParams } from "react-router";
-import { getApi } from "../api/client";
 import Button from "./../elements/Button";
 
-const DetailContents = (props) => {
-  const { user_name, insert_dt } = props;
-  // const params = useParams()
-  // const {id} = params
-  // const [data, setData] = useState()
-  // useEffect(() => {
-  //     if (id) {
-  //         getApi(`/api/board/detail/${id}`)
-  //             .then((res) => {
-  //                 if (res.status === 200) {
-  //                     setData(res.data)
-  //                 }
-  //             }).catch((err) => {
-  //                 console.error(err)
-  //             })
-  //     }
-  // }, [])
+import { actionCreators as postActions } from "../redux/modules/post";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
-  // if (!data) {
-  //     return <div>Loading...</div>
-  // }
+const DetailContents = (props) => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { id } = params;
+  const token = sessionStorage.getItem("jwt_token");
+
+  const userInfo = useSelector((state)=>state.user.userInfo)
+
+  useEffect(() => {
+    dispatch(postActions.getDetailDB(userInfo.userId, id, token));
+  });
 
   return (
     <HeadLine>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex" }}>
           <Text size={"1.2em"} margin={"60px 20px 0px auto"}>
-            {user_name}kop
+            kop
           </Text>
           <Text size={"1.2em"} margin={"60px auto"}>
-            {insert_dt}2022-04-12
+            2022-04-12
           </Text>
         </div>
         <div>

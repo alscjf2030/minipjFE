@@ -25,23 +25,6 @@ const Header = () => {
 
   if (token && userInfo) {
     return (
-        <Navbar bg="primary" variant="dark">
-          <Container>
-            <Grid is_flex>
-              <Navbar.Brand href="/">Hang 9</Navbar.Brand>
-              <Nav className="me-auto">
-                <Grid is_flex>
-                  <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="/mypage">내 정보</Nav.Link>
-                  <Nav.Link onClick={logout}>로그아웃</Nav.Link>
-                </Grid>
-              </Nav>
-            </Grid>
-          </Container>
-        </Navbar>
-    );
-  }
-  return (
       <Navbar bg="primary" variant="dark">
         <Container>
           <Grid is_flex>
@@ -49,13 +32,30 @@ const Header = () => {
             <Nav className="me-auto">
               <Grid is_flex>
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/signup">회원가입</Nav.Link>
-                <Nav.Link href="/login">로그인</Nav.Link>
+                <Nav.Link href="/mypage">내 정보</Nav.Link>
+                <Nav.Link onClick={logout}>로그아웃</Nav.Link>
               </Grid>
             </Nav>
           </Grid>
         </Container>
       </Navbar>
+    );
+  }
+  return (
+    <Navbar bg="primary" variant="dark">
+      <Container>
+        <Grid is_flex>
+          <Navbar.Brand href="/">Hang 9</Navbar.Brand>
+          <Nav className="me-auto">
+            <Grid is_flex>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/signup">회원가입</Nav.Link>
+              <Nav.Link href="/login">로그인</Nav.Link>
+            </Grid>
+          </Nav>
+        </Grid>
+      </Container>
+    </Navbar>
   );
 };
 

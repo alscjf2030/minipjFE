@@ -27,7 +27,7 @@ const Login = () => {
     >
       <Grid width={"250px"} margin={"127.5px auto"}>
         <Grid width={"250px"} margin={"25px auto"}>
-          <p>아이디</p>
+          <p>이메일</p>
           <Input
             width={"250px"}
             onChange={(e) => {

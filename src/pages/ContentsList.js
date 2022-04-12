@@ -1,36 +1,42 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 import MainPost from "../component/MainPost";
-
-import {useSelector} from "react-redux";
 import Grid from "../elements/Grid";
 import Image from "../elements/Image";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const ContentsList = (props) => {
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem("jwt_token");
+  const userInfo = useSelector((state) => state.user.userInfo);
 
-    const post_list = useSelector((state) => state.post.list)
-    console.log(post_list)
+  const postList = useSelector((state) => state?.post?.post);
+  // console.log(postList)
 
-    return (
-        <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"}}>
-            {post_list.map((p, idx) => {
-                return <MainPost key={p.boardId} {...p}/>
-            })}
-            <div>
-                <div>작성자 / 시간</div>
+  useEffect(() => {
+    dispatch(postActions.getPostSp(userInfo.userId, token));
+  }, []);
 
-                <div>제목</div>
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        boxSizing: "border-box",
+        border: "1px solid blue",
+        width: "100%",
+        margin: "20px auto",
+        flexWrap: "wrap",
+      }}
+    >
+      {postList?.map((cur, idx) => {
+        return <MainPost key={cur?.boardId} {...cur} />;
+      })}
+    </div>
+  );
+};
 
-                <Image src="img/logo.png"/>
-
-                <div>게시글 내용</div>
-            </div>
-        </div>
-    )
-}
-
-export default ContentsList
+export default ContentsList;
