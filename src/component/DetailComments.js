@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useNavigate } from "react-router-dom";
+import CmtModal from "./CmtModal";
 
 const DetailComments = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ const DetailComments = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_token");
+
   const nickname = () => {
     if (token) {
       return JSON.parse(atob(token.split(".")[1])).NICKNAME;
@@ -38,10 +40,6 @@ const DetailComments = (props) => {
       boardId: 1,
     },
   ];
-
-  const modalIsOpen = () => {
-    setIsOpen(true);
-  };
 
   useEffect(() => {
     dispatch(
@@ -88,74 +86,18 @@ const DetailComments = (props) => {
               // visibility={
               //   nickname === cur.userInfo.nickname ? "visible" : "hidden"
               // }
-              onClick={modalIsOpen}
+              onClick={() => {
+                setUpComment(cur);
+                setIsOpen(true);
+              }}
             >
               수정
             </Button>
           </Grid>
-          <Modal
-            isOpen={isOpen}
-            style={{
-              overlay: { margin: "auto" },
-              content: {
-                width: "820px",
-                height: "400px",
-                margin: "auto",
-                border: "2px solid black",
-              },
-            }}
-          >
-            <Grid
-              // border={"1px solid black"}
-              width={"660px"}
-              height={"150px"}
-              margin={"60px auto -20px auto"}
-            >
-              <PostInput
-                width={"600px"}
-                height={"80px"}
-                margin={"auto"}
-                onChange={(e) => {
-                  setUpComment(e.target.value);
-                }}
-                defaultValue={cur.comment}
-              >
-                {cur.userInfo.nickname}
-              </PostInput>
-            </Grid>
-            <Grid is_flex width={"300px"} margin={"0 auto"}>
-              <Button
-                bg={"#0D6EFD"}
-                onClick={() => {
-                  dispatch(
-                    commentActions.updateCommentSP(
-                      {
-                        userId: cur.userId,
-                        boardId: cur.boardId,
-                        comment: upComment,
-                        commentId: cur.id,
-                      },
-                      sessionStorage.getItem("jwt_token")
-                    )
-                  );
-                  setIsOpen(false);
-                  navigate("/detail");
-                }}
-              >
-                수정
-              </Button>
-              <Button
-                bg={"#0D6EFD"}
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              >
-                취소
-              </Button>
-            </Grid>
-          </Modal>
         </Grid>
       ))}
+      {console.log(upComment)}
+      <CmtModal isOpen={isOpen} commentInfo={upComment}></CmtModal>
     </>
   );
 };

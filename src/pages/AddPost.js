@@ -11,7 +11,6 @@ import {useSelector, useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {actionCreators as postActions} from "../redux/modules/post";
 
-
 const AddPost = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();

@@ -7,6 +7,7 @@ import {
     putApi,
     setClient,
 } from "../../api/client";
+import axios from "axios";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -33,28 +34,64 @@ const initialPost = {
     is_me: false,
 };
 
-const addPostSP = (data, image, navigate) => {
-    return function (dispatch, getState) {
 
-        postApi(
-            "/api/board/regist",
-            data
-        ).then((res) => {
-            console.log(res);
-            postApi('/api/board/photo', {
-                boardId: res.data.boardId,
-                file: image
-            }).catch((err) => {
-                console.log(err)
-                window.alert("이미지 업로드에 실패했습니다.");
-            })
-            dispatch(addPost(data));
-            navigate('/')
-        }).catch((err) => {
-            console.log(err);
-            window.alert("게시물 작성에 실패했습니다.");
-        });
-    };
+// const addPostSP = (data, image, navigate) => {
+//     return function (dispatch, getState) {
+
+//         postApi(
+//             "/api/board/regist",
+//             data
+//         ).then((res) => {
+//             console.log(res);
+//             postApi('/api/board/photo', {
+//                 boardId: res.data.boardId,
+//                 file: image
+//             }).catch((err) => {
+//                 console.log(err)
+//                 window.alert("이미지 업로드에 실패했습니다.");
+//             })
+//             dispatch(addPost(data));
+//             navigate('/')
+//         }).catch((err) => {
+//             console.log(err);
+//             window.alert("게시물 작성에 실패했습니다.");
+//         });
+//     };
+
+const addPostSP = (data, token) => {
+  console.log(data);
+  return function (dispatch, getState) {
+    const _image = getState().image.preview;
+
+    axios
+      .post(
+        "http://52.79.228.83:8080/api/board/regist",
+        {
+          title: "이거 이제 되니",
+          content: "dfdfdfdfd",
+          userId: 1,
+          headinfo: "브랜드",
+          topinfo: "브랜드",
+          bottominfo: "브랜드",
+          shoesinfo: "브랜드",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        // dispatch(addPost(data));
+        // navigate("/", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("게시물 작성에 실패했습니다.");
+      });
+  };
+
 };
 
 const getPostSp = () => {
