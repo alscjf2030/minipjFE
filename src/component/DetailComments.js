@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
-import PostInput from "../elements/PostInput";
-import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +9,7 @@ import CmtModal from "./CmtModal";
 const DetailComments = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [upComment, setUpComment] = useState();
-  // const comment = useSelector((state) => state.comment.comment);
+  const comment = useSelector((state) => state.comment.comment);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_token");
@@ -22,24 +20,24 @@ const DetailComments = (props) => {
     }
   };
 
-  const comment = [
-    {
-      userInfo: { nickname: "kop" },
-      id: 1,
-      comment: "너무 고민인데?",
-      commentId: 1,
-      userId: 1,
-      boardId: 1,
-    },
-    {
-      userInfo: { nickname: "kop" },
-      id: 2,
-      comment: "어허",
-      commentId: 1,
-      userId: 1,
-      boardId: 1,
-    },
-  ];
+  // const comment = [
+  //   {
+  //     userInfo: { nickname: "kop" },
+  //     id: 1,
+  //     comment: "너무 고민인데?",
+  //     commentId: 1,
+  //     userId: 1,
+  //     boardId: 1,
+  //   },
+  //   {
+  //     userInfo: { nickname: "kop" },
+  //     id: 2,
+  //     comment: "어허",
+  //     commentId: 1,
+  //     userId: 1,
+  //     boardId: 1,
+  //   },
+  // ];
 
   useEffect(() => {
     dispatch(

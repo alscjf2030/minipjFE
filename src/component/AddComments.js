@@ -10,9 +10,10 @@ const AddComments = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userinfo = useSelector((state) => state.user.userInfo);
-  console.log(userinfo);
+
 
   const [comment, setComment] = useState();
+    console.log(comment);
 
   const info = {
     boardId: 1,

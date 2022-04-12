@@ -23,9 +23,9 @@ const SignUp = () => {
     if (!emailCheck.test(userId)) {
       return window.alert("이메일 형식을 지켜주세요");
     }
-    if (!pwCheck.test(pw)) {
-      return window.alert("비밀번호 형식을 지켜주세요");
-    }
+    // if (!pwCheck.test(pw)) {
+    //   return window.alert("비밀번호 형식을 지켜주세요");
+    // }
     if (pw != checkPw) {
       return window.alert("비밀번호 확인을 해주세요");
     } else {
@@ -54,7 +54,7 @@ const SignUp = () => {
           height={"30px"}
           margin={"50px auto"}
         >
-          <p>아이디</p>
+          <p>이메일</p>
           <Input
             width={"300px"}
             onChange={(e) => setUserID(e.target.value)}

@@ -1,39 +1,21 @@
-import {createAction, handleActions} from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import {
-    deleteApi,
-    getApi,
-    postApi,
-    putApi,
-    setClient,
+  deleteApi,
+  getApi,
+  postApi,
+  putApi,
+  setClient,
 } from "../../api/client";
 import axios from "axios";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
 
-const setPost = createAction(SET_POST, (post_list) => ({post_list}));
-const addPost = createAction(ADD_POST, (post) => ({post}));
+const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
+const addPost = createAction(ADD_POST, (post) => ({ post }));
 
-const initialState = {
-    list: [],
-};
-
-const initialPost = {
-    boardId: 0,
-    user_info: {
-        user_name: "SMC",
-        user_profile:
-            "https://images.wallpaperscraft.com/image/single/cat_cute_lie_71887_1920x1080.jpg",
-    },
-    image_url:
-        "https://images.wallpaperscraft.com/image/single/cat_cute_lie_71887_1920x1080.jpg",
-    contents: "고양이입니다.",
-    comment_cnt: 50,
-    insert_dt: "2022-04-09 10:00:00",
-    is_me: false,
-};
-
+const initialState = {};
 
 // const addPostSP = (data, image, navigate) => {
 //     return function (dispatch, getState) {
@@ -61,26 +43,27 @@ const initialPost = {
 const addPostSP = (data, token) => {
   console.log(data);
   return function (dispatch, getState) {
-    const _image = getState().image.preview;
+    const frm = new FormData();
+
+    frm.append("files", data.image, data.image.name);
+    frm.append("title", data.title);
+    frm.append("content", data.content);
+    frm.append("userId", data.userId);
+    frm.append("headinfo", data.headinfo);
+    frm.append("topinfo", data.topinfo);
+    frm.append("bottominfo", data.bottominfo);
+    frm.append("shoesinfo", data.shoesinfo);
+    for (let value of frm.values()) {
+      console.log(data.image.name);
+    }
 
     axios
-      .post(
-        "http://52.79.228.83:8080/api/board/regist",
-        {
-          title: "이거 이제 되니",
-          content: "dfdfdfdfd",
-          userId: 1,
-          headinfo: "브랜드",
-          topinfo: "브랜드",
-          bottominfo: "브랜드",
-          shoesinfo: "브랜드",
+      .post("http://52.79.228.83:8080/api/board/regist", frm, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      })
       .then((res) => {
         console.log(res);
         // dispatch(addPost(data));
@@ -91,62 +74,89 @@ const addPostSP = (data, token) => {
         window.alert("게시물 작성에 실패했습니다.");
       });
   };
-
 };
 
-const getPostSp = () => {
-    return function (dispatch, getState) {
-        getApi("/api/board")
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+const getPostSp = (userId, token) => {
+  return function (dispatch, getState) {
+    axios
+      .get(`http://52.79.228.83:8080/api/board/1/1`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.boardList);
+        dispatch(setPost(res.data.boardList));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const getDetailDB = (userId, boardId, token) => {
+  return function (dispatch, getState) {
+    axios
+      .get(`http://52.79.228.83:8080/api/board/detail/${boardId}/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
 
 const deletePostSp = (data) => {
-    return function (dispatch, getState) {
-        deleteApi(`/api/board/${data.boardid}`)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                window.alert("게시물 작성에 실패했습니다.");
-            });
-    };
+  return function (dispatch, getState) {
+    deleteApi(`/api/board/${data.boardid}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("게시물 작성에 실패했습니다.");
+      });
+  };
 };
 
 const updatePostSp = (data) => {
-    return function (dispatch, getState) {
-        putApi(`/api/board/${data.boardid}`)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+  return function (dispatch, getState) {
+    putApi(`/api/board/${data.boardid}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
 
 export default handleActions(
-    {
-        [SET_POST]: (state, action) => produce(state, (draft) => {
-        }),
-        [ADD_POST]: (state, action) =>
-            produce(state, (draft) => {
-                draft.list.unshift(action.payload.post);
-            }),
-    },
-    initialState
+  {
+    [SET_POST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.post_list);
+        draft.post = action.payload.post_list;
+      }),
+    [ADD_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.unshift(action.payload.post_list);
+      }),
+  },
+  initialState
 );
 
 const actionCreators = {
-    setPost,
-    addPost,
-    addPostSP,
+  setPost,
+  addPost,
+  addPostSP,
+  getPostSp,
+  getDetailDB,
 };
 
-export {actionCreators};
+export { actionCreators };

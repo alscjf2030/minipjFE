@@ -5,12 +5,14 @@ import user from "./modules/user";
 import comment from "./modules/comment";
 import post from "./modules/post";
 import image from "./modules/image";
+import mypage from "./modules/mypage";
 
 const rootReducer = combineReducers({
   user: user,
   comment: comment,
   post: post,
-  image: image
+  image: image,
+  mypage: mypage,
 });
 
 const middlewares = [thunk];
@@ -23,9 +25,9 @@ if (env === "development") {
 }
 
 const composeEnhancers =
-    typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-        : compose;
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 

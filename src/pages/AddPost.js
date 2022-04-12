@@ -14,8 +14,9 @@ import { actionCreators as postActions } from "../redux/modules/post";
 const AddPost = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const token = sessionStorage.getItem("jwt_token");
   const is_login = useSelector((state) => state.user.userInfo.userId);
+
   const post_list = useSelector((state) => state.post.post);
 
   const [image, setImage] = useState();
@@ -25,6 +26,8 @@ const AddPost = (props) => {
   const [topinfo, setTopinfo] = useState("");
   const [bottominfo, setBottominfo] = useState("");
   const [shoesinfo, setShoesinfo] = useState("");
+
+  //   console.log(image?.split(",")[1]);
 
   const changeContents = (e) => {
     setContent(e.target.value);
@@ -49,19 +52,21 @@ const AddPost = (props) => {
     dispatch(
       postActions.addPostSP(
         {
-          title: "제목",
-          content: "내용",
-          headinfo: "모자",
-          topinfo: "상의",
-          bottominfo: "하의",
-          shoesinfo: "신발",
-          userId: 1,
+          title: title,
+          content: content,
+          headinfo: headinfo,
+          topinfo: topinfo,
+          bottominfo: bottominfo,
+          shoesinfo: shoesinfo,
+          userId: is_login,
+          image: image,
         },
-        image,
-        navigate
+        token
       )
     );
   };
+
+  console.log(image);
 
   // 로그인 후에만 가능합니다.
   // if(!is_login){

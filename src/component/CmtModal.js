@@ -16,6 +16,8 @@ const CmtModal = (props) => {
     setComment(e.target.value);
   };
 
+  console.log(commentInfo);
+
   return (
     <>
       <Modal
@@ -56,7 +58,7 @@ const CmtModal = (props) => {
                     userId: commentInfo.userId,
                     boardId: 1,
                     comment: comment,
-                    commentId: commentInfo.commentId,
+                    commentId: commentInfo.id,
                   },
                   token
                 )

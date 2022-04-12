@@ -8,7 +8,7 @@ import SignUp from "../pages/SignUp";
 import Main from "../pages/Main";
 import Detail from "../pages/Detail";
 import AddPost from "../pages/AddPost";
-
+import MyPage from "./../pages/MyPage";
 import Header from "../component/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
@@ -17,19 +17,20 @@ import { useEffect } from "react";
 import { setClient } from "../api/client";
 
 function App() {
-    return (
-        <MainContainer>
-            <Header />
-            <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/detail/" element={<Detail />} />
-                <Route path="/write" element={<AddPost />} />
-            </Routes>
-            <GlobalStyle />
-        </MainContainer>
-    );
+  return (
+    <MainContainer>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/write" element={<AddPost />} />
+        <Route path="/mypage" element={<MyPage />} />
+      </Routes>
+      <GlobalStyle />
+    </MainContainer>
+  );
 }
 
 Modal.setAppElement("#root");
