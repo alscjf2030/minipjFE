@@ -9,8 +9,13 @@ import { useNavigate } from "react-router";
 
 const CmtModal = (props) => {
   const { isOpen, commentInfo } = props;
+  const [comment, setComment] = useState();
   const dispatch = useDispatch();
-  console.log(commentInfo);
+  const token = sessionStorage.getItem("jwt_token");
+  const update = (e) => {
+    setComment(e.target.value);
+  };
+
   return (
     <>
       <Modal
@@ -32,6 +37,7 @@ const CmtModal = (props) => {
           margin={"60px auto -20px auto"}
         >
           <PostInput
+            onChange={update}
             defaultValue={commentInfo?.comment}
             width={"600px"}
             height={"80px"}
@@ -47,12 +53,12 @@ const CmtModal = (props) => {
               dispatch(
                 commentActions.updateCommentSP(
                   {
-                    userId: "kop",
+                    userId: commentInfo.userId,
                     boardId: 1,
-                    comment: "수정된 댓글",
-                    commentId: 1,
+                    comment: comment,
+                    commentId: commentInfo.commentId,
                   },
-                  sessionStorage.getItem("jwt_token")
+                  token
                 )
               );
             }}

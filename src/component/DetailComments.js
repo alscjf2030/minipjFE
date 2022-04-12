@@ -41,10 +41,6 @@ const DetailComments = (props) => {
     },
   ];
 
-  const modalIsOpen = () => {
-    setIsOpen(true);
-  };
-
   useEffect(() => {
     dispatch(
       commentActions.getCommentSP(1, sessionStorage.getItem("jwt_token"))

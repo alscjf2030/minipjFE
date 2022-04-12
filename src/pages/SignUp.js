@@ -21,13 +21,13 @@ const SignUp = () => {
       return window.alert("공백을 채워주세요");
     }
     if (!emailCheck.test(userId)) {
-      return window.alert("지켜라");
+      return window.alert("이메일 형식을 지켜주세요");
     }
     if (!pwCheck.test(pw)) {
-      return window.alert("지키라고");
+      return window.alert("비밀번호 형식을 지켜주세요");
     }
-    if (pw !== pwCheck) {
-      return window.alert("어허 끝까지 안지키네");
+    if (pw != checkPw) {
+      return window.alert("비밀번호 확인을 해주세요");
     } else {
       dispatch(userActions.SignUpSP(userId, nickname, pw, checkPw));
       navigate("/login");
