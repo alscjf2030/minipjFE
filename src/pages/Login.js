@@ -51,7 +51,14 @@ const Login = () => {
         width={"250px"}
         margin={"-50px auto 5px auto"}
       >
-        <Button bg={"#0D6EFD"}>회원가입</Button>
+        <Button
+          onClick={() => {
+            navigate("/signup");
+          }}
+          bg={"#0D6EFD"}
+        >
+          회원가입
+        </Button>
         <Button bg={"#0D6EFD"} onClick={login}>
           로그인
         </Button>
