@@ -12,7 +12,6 @@ const ContentsList = (props) => {
   const userInfo = useSelector((state) => state.user.userInfo);
 
   const postList = useSelector((state) => state?.post?.post);
-  // console.log(postList)
 
   useEffect(() => {
     dispatch(postActions.getPostSp(userInfo.userId, token));
