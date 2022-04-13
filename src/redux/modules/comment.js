@@ -52,7 +52,6 @@ const getCommentSP = (boardId, token) => {
         },
       })
       .then((res) => {
-        console.log(res);
         const post = res.data;
         dispatch(getComment(post));
       })

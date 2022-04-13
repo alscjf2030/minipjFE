@@ -16,7 +16,6 @@ const CmtModal = (props) => {
     setComment(e.target.value);
   };
 
-  console.log(commentInfo);
 
   return (
     <>

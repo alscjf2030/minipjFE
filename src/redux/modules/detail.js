@@ -18,6 +18,7 @@ const initialState = {};
 
 const getDetailDB = (userId, boardId, token) => {
   return function (dispatch, getState) {
+    console.log(userId, boardId, token);
     axios
       .get(`http://52.79.228.83:8080/api/board/detail/${boardId}/${userId}`, {
         headers: {

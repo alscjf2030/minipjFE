@@ -16,10 +16,8 @@ const DetailComments = (props) => {
   const token = sessionStorage.getItem("jwt_token");
   const params = useParams();
   const { id } = params;
-  console.log(id);
 
   const nickname = JSON.parse(atob(token.split(".")[1])).NICKNAME;
-  console.log("닉네임", nickname);
 
   // const comment = [
   //   {
@@ -96,7 +94,6 @@ const DetailComments = (props) => {
           </Grid>
         </Grid>
       ))}
-      {console.log(upComment)}
       <CmtModal isOpen={isOpen} commentInfo={upComment}></CmtModal>
     </>
   );
