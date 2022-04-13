@@ -32,7 +32,7 @@ const ContentsList = (props) => {
       {postList?.map((cur, idx) => {
         return (
           <>
-            <MainPost key={cur?.boardId} {...cur} /> {console.log(cur)}
+            <MainPost key={cur?.boardId} {...cur} />
           </>
         );
       })}

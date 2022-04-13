@@ -132,7 +132,6 @@ const getPostSp = (userId, token) => {
         },
       })
       .then((res) => {
-        console.log(res.data.boardList);
         dispatch(setPost(res.data.boardList));
       })
       .catch((err) => {
@@ -185,7 +184,6 @@ export default handleActions(
   {
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.post_list);
         draft.post = action.payload.post_list;
       }),
     [ADD_POST]: (state, action) =>

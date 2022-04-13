@@ -16,21 +16,21 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { useEffect } from "react";
 
 function App() {
-    return (
-        <MainContainer>
-            <Header />
-            <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/detail/:id/:userId" element={<Detail />} />
-                <Route path="/write" element={<AddPost />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/write/:id" element={<AddPost />} />
-            </Routes>
-            <GlobalStyle />
-        </MainContainer>
-    );
+  return (
+    <MainContainer>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/detail/:id/:userId" element={<Detail />} />
+        <Route path="/write" element={<AddPost />} />
+        <Route path="/mypage/:userId" element={<MyPage />} />
+        <Route path="/write/:id" element={<AddPost />} />
+      </Routes>
+      <GlobalStyle />
+    </MainContainer>
+  );
 }
 
 Modal.setAppElement("#root");
