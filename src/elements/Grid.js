@@ -13,6 +13,7 @@ const Grid = (props) => {
     shadow,
     height,
     line_height,
+    color,
     children,
   } = props;
 
@@ -27,6 +28,7 @@ const Grid = (props) => {
     shadow: shadow,
     height: height,
     line_height: line_height,
+    color: color,
   };
 
   return (
@@ -48,6 +50,7 @@ Grid.defualtProps = {
   shadow: false,
   height: "100%",
   line_height: false,
+  color: false,
 };
 
 const GridBox = styled.div`
@@ -57,6 +60,7 @@ const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   ${(props) => (props.line_height ? `line-height: ${props.line_height};` : "")}
+  ${(props) => (props.color ? `color: ${props.color};` : "black")}
   box-sizing: border-box;
   word-break:break-all;
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
