@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 const MainPost = (props) => {
   const navigate = useNavigate();
-  console.log(props);
+
   const {
     title,
     content,
@@ -15,8 +15,9 @@ const MainPost = (props) => {
     modifeidAt,
     url,
     boardId,
+    userId,
   } = props;
-  console.log(url);
+
   return (
     <div
       onClick={() => {
@@ -43,7 +44,7 @@ const MainPost = (props) => {
         ></Image>
 
         <Grid width={"80%"} margin={"10px auto"}>
-          {userinfo.nickname}
+          {userinfo?.nickname}
         </Grid>
         <Grid width={"80%"} margin={"15px auto"}>
           {createdAt}
@@ -54,7 +55,6 @@ const MainPost = (props) => {
           margin={"20px auto"}
           padding={"10px"}
           border={"1px solid black"}
-          bor_radius
         >
           {content}
         </Grid>

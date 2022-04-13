@@ -15,8 +15,7 @@ const AddPost = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_token");
-  const is_login = useSelector((state) => state.user.userInfo.userId);
-
+  const userId = useSelector((state) => state.user.userInfo.userId);
   const post_list = useSelector((state) => state.post.post);
 
   const [image, setImage] = useState();
@@ -27,7 +26,6 @@ const AddPost = (props) => {
   const [bottominfo, setBottominfo] = useState("");
   const [shoesinfo, setShoesinfo] = useState("");
 
-  //   console.log(image?.split(",")[1]);
 
   const changeContents = (e) => {
     setContent(e.target.value);
@@ -76,7 +74,7 @@ const AddPost = (props) => {
             topinfo: topinfo,
             bottominfo: bottominfo,
             shoesinfo: shoesinfo,
-            userId: is_login,
+            userId: userId,
             image: image,
           },
           token
@@ -86,7 +84,6 @@ const AddPost = (props) => {
     }
   };
 
-  console.log(image);
 
   // 로그인 후에만 가능합니다.
   // if(!is_login){
