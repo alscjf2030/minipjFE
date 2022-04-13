@@ -24,24 +24,28 @@ const MainPost = (props) => {
       }}
     >
       <Grid
-        border={"1px solid red"}
+        bor_radius
+        shadow
+        border={"1px solid slateblue"}
         margin={"30px 10px"}
         height={"680px"}
         width={"365px"}
       >
-        <Grid width={"80%"} border={"1px solid black"} margin={"20px 0"}>
+        <Grid width={"80%"} margin={"20px 0"}>
           {userinfo.nickname}
         </Grid>
-        <Grid width={"80%"} border={"1px solid black"} margin={"20px 0"}>
+        <Grid width={"80%"} margin={"20px 0"}>
           {createdAt}
         </Grid>
-        <Grid width={"50%"} border={"1px solid black"} margin={"20px 0"}>
+        <Grid width={"50%"} margin={"20px 0"}>
           {title}
         </Grid>
 
         <Image width={"360px"} height={"360px"} src={url}></Image>
 
-        <Grid>{content}</Grid>
+        <Grid width={"80%"} margin={"20px auto"}>
+          {content}
+        </Grid>
       </Grid>
     </div>
   );

@@ -14,7 +14,7 @@ const Login = () => {
 
   const login = () => {
     dispatch(userActions.LoginSP(userId, pw));
-    // navigate("/");
+    navigate("/");
   };
 
   return (

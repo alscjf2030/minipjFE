@@ -26,7 +26,6 @@ const ContentsList = (props) => {
         justifyContent: "center",
         alignItems: "center",
         boxSizing: "border-box",
-        border: "1px solid blue",
         width: "100%",
         margin: "20px auto",
         flexWrap: "wrap",

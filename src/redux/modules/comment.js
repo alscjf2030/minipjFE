@@ -12,7 +12,10 @@ const UPDATE = "UPDATE";
 const addComment = createAction(ADDCOMMENT, (user) => ({ user }));
 const getComment = createAction(GETCOMMENT, (comment) => ({ comment }));
 const deleteComment = createAction(DELETE, (commentInfo) => ({ commentInfo }));
-const updateComment = createAction(UPDATE, (commentInfo) => ({ commentInfo }));
+const updateComment = createAction(UPDATE, (commentInfo, idx) => ({
+  commentInfo,
+  idx,
+}));
 
 const initialState = { comment: [] };
 
@@ -78,12 +81,12 @@ const deleteCommentSP = (commentInfo, token) => {
   };
 };
 
-const updateCommentSP = (commentInfo, token) => {
+const updateCommentSP = (commentInfo, token, idx) => {
   return function (dispatch) {
     console.log(commentInfo);
     axios
       .put(
-        `http://52.79.228.83:8080/api/comment/${commentInfo.commentId}`,
+        `http://52.79.228.83:8080/api/comment/${commentInfo.id}`,
         {
           userId: commentInfo.userId,
           boardId: commentInfo.boardId,
@@ -97,7 +100,7 @@ const updateCommentSP = (commentInfo, token) => {
       )
       .then((res) => {
         console.log(res);
-        dispatch(updateComment(commentInfo));
+        dispatch(updateComment(commentInfo, idx));
       })
       .catch((err) => {
         console.log(err);
@@ -128,8 +131,10 @@ export default handleActions(
       }),
     [UPDATE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.commentInfo);
-        console.log(state);
+        const upComment = action.payload.commentInfo;
+        const idx = action.payload.idx;
+        console.log(state.comment[idx]);
+        draft.comment[idx] = upComment;
       }),
   },
   initialState

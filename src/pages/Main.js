@@ -10,11 +10,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   return (
-    <Grid
-      width={"80%"}
-      margin={"0 auto"}
-      border={"1px solid black"}
-    >
+    <Grid width={"70%"} margin={"0 auto"} >
       <ContentsList />
 
       <div style={{ display: "flex", float: "right" }}>
