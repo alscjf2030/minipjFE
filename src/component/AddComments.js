@@ -15,10 +15,9 @@ const AddComments = () => {
   const userinfo = useSelector((state) => state.user.userInfo);
 
   const [comment, setComment] = useState();
-  console.log(comment);
 
   const info = {
-    boardId: 1,
+    boardId: id,
     comment: comment,
     userId: userinfo.userId,
     userInfo: {

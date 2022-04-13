@@ -10,35 +10,13 @@ import CmtModal from "./CmtModal";
 const DetailComments = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [upComment, setUpComment] = useState();
+  const [idx, setIdx] = useState();
   const comment = useSelector((state) => state.comment.comment);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = sessionStorage.getItem("jwt_token");
   const params = useParams();
   const { id } = params;
-  console.log(id);
 
-  const nickname = JSON.parse(atob(token.split(".")[1])).NICKNAME;
-  console.log("닉네임", nickname);
-
-  // const comment = [
-  //   {
-  //     userInfo: { nickname: "kop" },
-  //     id: 1,
-  //     comment: "너무 고민인데?",
-  //     commentId: 1,
-  //     userId: 1,
-  //     boardId: 1,
-  //   },
-  //   {
-  //     userInfo: { nickname: "kop" },
-  //     id: 2,
-  //     comment: "어허",
-  //     commentId: 1,
-  //     userId: 1,
-  //     boardId: 1,
-  //   },
-  // ];
+  const nickname = useSelector((state) => state.user.userInfo.nickname);
 
   useEffect(() => {
     dispatch(
@@ -83,11 +61,12 @@ const DetailComments = (props) => {
             </Button>
             <Button
               bg={"#0D6EFD"}
-              // visibility={
-              //   nickname === cur.userInfo.nickname ? "visible" : "hidden"
-              // }
+              visibility={
+                nickname === cur.userInfo.nickname ? "visible" : "hidden"
+              }
               onClick={() => {
                 setUpComment(cur);
+                setIdx(idx);
                 setIsOpen(true);
               }}
             >
@@ -96,8 +75,13 @@ const DetailComments = (props) => {
           </Grid>
         </Grid>
       ))}
-      {console.log(upComment)}
-      <CmtModal isOpen={isOpen} commentInfo={upComment}></CmtModal>
+
+      <CmtModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        commentInfo={upComment}
+        idx={idx}
+      ></CmtModal>
     </>
   );
 };

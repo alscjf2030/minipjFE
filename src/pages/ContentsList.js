@@ -14,12 +14,9 @@ const ContentsList = (props) => {
     const postList = useSelector((state) => state?.post?.post);
     // console.log(postList)
 
-    const userNick = useSelector((state) => state.user.userInfo.username)
-    console.log(userNick)
-
     useEffect(() => {
         dispatch(postActions.getPostSp(userInfo.userId, token));
-    }, []);
+    }, [postList]);
 
     return (
         <div
@@ -29,7 +26,6 @@ const ContentsList = (props) => {
                 justifyContent: "center",
                 alignItems: "center",
                 boxSizing: "border-box",
-                border: "1px solid blue",
                 width: "100%",
                 margin: "20px auto",
                 flexWrap: "wrap",
@@ -43,11 +39,3 @@ const ContentsList = (props) => {
 };
 
 export default ContentsList;
-
-// {post_list.map((p, idx) => {
-//     if(p.userNick.username === userNick?.userInfo.nickname){
-//         return <MainPost key={p.boardId} {...p} isMe />
-//     }else{
-//         return <MainPost key={p.boardId} {...p}/>
-//     }
-// })}

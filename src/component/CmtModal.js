@@ -8,15 +8,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 const CmtModal = (props) => {
-  const { isOpen, commentInfo } = props;
+  console.log(props.idx);
+  const { isOpen, setIsOpen, commentInfo } = props;
   const [comment, setComment] = useState();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_token");
   const update = (e) => {
     setComment(e.target.value);
   };
-
-  console.log(commentInfo);
 
   return (
     <>
@@ -52,19 +51,22 @@ const CmtModal = (props) => {
           <Button
             bg={"#0D6EFD"}
             onClick={() => {
+              console.log({ ...commentInfo, comment: comment });
               dispatch(
                 commentActions.updateCommentSP(
                   { ...commentInfo, comment: comment },
-                  token
+                  token,
+                  props.idx
                 )
               );
+              setIsOpen(false);
             }}
           >
             수정
           </Button>
           <Button
             onClick={() => {
-              window.location.reload();
+              setIsOpen(false);
             }}
             bg={"#0D6EFD"}
           >

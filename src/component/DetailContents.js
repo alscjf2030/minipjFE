@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-const DetailContents = () => {
+const DetailContents = (props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const params = useParams();
@@ -22,6 +22,7 @@ const DetailContents = () => {
     const token = sessionStorage.getItem("jwt_token");
 
     const userInfo = useSelector((state) => state.user.userInfo);
+    // console.log("유저아이디", userInfo.userId);
     const detail = useSelector((state) => state.post.detail);
     // console.log(detail);
 
@@ -80,7 +81,11 @@ const DetailContents = () => {
                             alignItems: "center",
                         }}
                     >
-                        <Image width={"100%"} border={"1px solid black"} src={detail?.url} />
+                        <Image
+                            width={"70%"}
+                            border={"1px solid black"}
+                            src={detail?.url}
+                        />
                     </div>
                     <div
                         style={{

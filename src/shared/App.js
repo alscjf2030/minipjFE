@@ -46,5 +46,5 @@ const GlobalStyle = createGlobalStyle`
 const MainContainer = styled.div`
   position: relative;
   margin: auto;
-  max-width: 80%;
+  max-width: 100%;
 `;

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import Grid from "../elements/Grid";
 import Text from "../elements/Text";
@@ -14,11 +14,10 @@ import { actionCreators as postActions } from "../redux/modules/post";
 const AddPost = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const params = useParams()
     const token = sessionStorage.getItem("jwt_token");
 
-    const params = useParams()
-
-    const is_login = useSelector((state) => state.user.userInfo.userId);
+    const userId = useSelector((state) => state.user.userInfo.userId);
     const post_list = useSelector((state) => state.post.post);
 
     const postNum = params.id;
@@ -43,7 +42,6 @@ const AddPost = (props) => {
     const [bottominfo, setBottominfo] = useState(_post?.bottominfo || '');
     const [shoesinfo, setShoesinfo] = useState(_post?.shoesinfo || '');
 
-    //   console.log(image?.split(",")[1]);
 
     const changeContents = (e) => {
         setContent(e.target.value);
@@ -75,7 +73,7 @@ const AddPost = (props) => {
                     bottominfo,
                     shoesinfo,
                     image,
-                    userId: is_login,
+                    userId: userId,
                 },
                 postNum,
                 navigate
@@ -84,28 +82,46 @@ const AddPost = (props) => {
     }
 
     const addPost = () => {
-        dispatch(
-            postActions.addPostSP(
-                {
-                    title: title,
-                    content: content,
-                    headinfo: headinfo,
-                    topinfo: topinfo,
-                    bottominfo: bottominfo,
-                    shoesinfo: shoesinfo,
-                    userId: is_login,
-                    image: image,
-                },
-                token,
-                navigate
-            )
-        );
+        if (!headinfo) {
+            setHeadinfo("X");
+        }
+        if (!topinfo) {
+            setTopinfo("X");
+        }
+        if (!bottominfo) {
+            setBottominfo("X");
+        }
+        if (!shoesinfo) {
+            setShoesinfo("X");
+        }
+        if (!title) {
+            return window.alert("제목을 입력해주세요");
+        }
+        if (!content) {
+            return window.alert("내용을 입력해주세요");
+        } else {
+            dispatch(
+                postActions.addPostSP(
+                    {
+                        title: title,
+                        content: content,
+                        headinfo: headinfo,
+                        topinfo: topinfo,
+                        bottominfo: bottominfo,
+                        shoesinfo: shoesinfo,
+                        userId: userId,
+                        image: image,
+                    },
+                    token
+                )
+            );
+            navigate("/");
+        }
     };
 
-    console.log(image);
 
     // 로그인 후에만 가능합니다.
-    // if(!is_login){
+    // if(!userId){
     //     return (
     //         <div style={{display: "flex",
     //             justifyContent: "center",
