@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import jwt_decode from "jwt-decode";
 import { getApi, postApi, setClient } from "../../api/client";
+import axios from "axios";
 
 // 액션 타입
 const LOGIN = "LOGIN";
@@ -41,12 +42,10 @@ const LoginSP = (userId, pw) => {
     })
       .then((res) => {
         const token = res.headers.authorization.split(" ")[1];
-        console.log(res);
-        console.log(jwt_decode(token));
-        console.log(JSON.parse(atob(token.split(".")[1])).USER_NAME);
         const useremail = JSON.parse(atob(token.split(".")[1])).USER_NAME;
         const nickname = JSON.parse(atob(token.split(".")[1])).NICKNAME;
         const userId = JSON.parse(atob(token.split(".")[1])).USER_ID;
+
         sessionStorage.setItem("jwt_token", token);
         setClient(token);
         dispatch(
@@ -63,17 +62,31 @@ const LoginSP = (userId, pw) => {
 
 const LoginCheckSP = (token) => {
   return function (dispatch, getState) {
-    console.log(token);
-    const useremail = JSON.parse(atob(token.split(".")[1])).USER_NAME;
-    const nickname = JSON.parse(atob(token.split(".")[1])).NICKNAME;
-    const userId = JSON.parse(atob(token.split(".")[1])).USER_ID;
-    dispatch(
-      logIn({
-        useremail: useremail,
-        nickname: nickname,
-        userId: userId,
+    axios
+      .post(
+        `http://52.79.228.83:8080/api/user/info`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        const useremail = res.data.username;
+        const nickname = res.data.nickname;
+        const userId = res.data.userId;
+        dispatch(
+          logIn({
+            useremail: useremail,
+            nickname: nickname,
+            userId: userId,
+          })
+        );
       })
-    );
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };
 
