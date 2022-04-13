@@ -31,19 +31,31 @@ const MainPost = (props) => {
         height={"680px"}
         width={"365px"}
       >
-        <Grid width={"80%"} margin={"20px 0"}>
-          {userinfo.nickname}
-        </Grid>
-        <Grid width={"80%"} margin={"20px 0"}>
-          {createdAt}
-        </Grid>
-        <Grid width={"50%"} margin={"20px 0"}>
+        <Grid width={"80%"} margin={"20px auto"}>
           {title}
         </Grid>
 
-        <Image width={"360px"} height={"360px"} src={url}></Image>
+        <Image
+          width={"360px"}
+          height={"360px"}
+          margin={"15px auto"}
+          src={url}
+        ></Image>
 
-        <Grid width={"80%"} margin={"20px auto"}>
+        <Grid width={"80%"} margin={"10px auto"}>
+          {userinfo.nickname}
+        </Grid>
+        <Grid width={"80%"} margin={"15px auto"}>
+          {createdAt}
+        </Grid>
+        <Grid
+          width={"80%"}
+          height={"15%"}
+          margin={"20px auto"}
+          padding={"10px"}
+          border={"1px solid black"}
+          bor_radius
+        >
           {content}
         </Grid>
       </Grid>
