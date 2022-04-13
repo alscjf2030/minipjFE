@@ -19,12 +19,13 @@ const DetailContents = (props) => {
   const token = sessionStorage.getItem("jwt_token");
 
   const userInfo = useSelector((state) => state.user.userInfo);
+  console.log("유저아이디", userInfo.userId);
   const detail = useSelector((state) => state.post.detail);
-  console.log(detail);
 
   useEffect(() => {
     dispatch(postActions.getDetailDB(userInfo.userId, id, token));
-  }, []);
+    console.log(userInfo.userId);
+  }, [userInfo.userId]);
 
   return (
     <HeadLine>
@@ -65,7 +66,11 @@ const DetailContents = (props) => {
               alignItems: "center",
             }}
           >
-            <Image border={"1px solid black"} src={detail?.url} />
+            <Image
+              width={"100%"}
+              border={"1px solid black"}
+              src={detail?.url}
+            />
           </div>
           <div
             style={{
