@@ -21,7 +21,7 @@ const MainPost = (props) => {
   return (
     <div
       onClick={() => {
-        navigate(`/detail/${boardId}`);
+        navigate(`/detail/${boardId}/${userId}`);
       }}
     >
       <Grid
