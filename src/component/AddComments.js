@@ -3,17 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import PostInput from "../elements/PostInput";
 import Button from "../elements/Button";
 import Grid from "../elements/Grid";
+import { useParams } from "react-router";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useNavigate } from "react-router-dom";
 
 const AddComments = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+  const { id } = params;
   const userinfo = useSelector((state) => state.user.userInfo);
 
-
   const [comment, setComment] = useState();
-    console.log(comment);
+  console.log(comment);
 
   const info = {
     boardId: 1,
@@ -29,7 +31,7 @@ const AddComments = () => {
     dispatch(
       commentActions.addCommentSP(info, sessionStorage.getItem("jwt_token"))
     );
-    navigate("/detail");
+    navigate(`/detail/${id}`);
   };
 
   return (

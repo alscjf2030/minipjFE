@@ -11,9 +11,11 @@ import axios from "axios";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
+const GETDETAIL = "GETDETAIL";
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
+const getDetial = createAction(GETDETAIL, (detail) => ({ detail }));
 
 const initialState = {};
 
@@ -104,6 +106,8 @@ const getDetailDB = (userId, boardId, token) => {
       })
       .then((res) => {
         console.log(res);
+        const detail = res.data;
+        dispatch(getDetial(detail));
       })
       .catch((err) => {
         console.log(err);
@@ -146,6 +150,11 @@ export default handleActions(
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.list.unshift(action.payload.post_list);
+      }),
+    [GETDETAIL]: (state, action) =>
+      produce(state, (draft) => {
+        // console.log(action.payload.detail);
+        draft.detail = action.payload.detail;
       }),
   },
   initialState

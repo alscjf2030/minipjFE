@@ -18,6 +18,7 @@ const Upload = ({ image, setImage }) => {
     // 업로드 파일 미리보기
     const reader = new FileReader();
     const file = fileInput.current.files[0];
+    console.log(file);
     setImage(file);
     reader.readAsDataURL(file);
     // console.log(file);

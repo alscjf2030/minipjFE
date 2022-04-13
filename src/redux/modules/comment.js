@@ -98,7 +98,7 @@ const updateCommentSP = (commentInfo, token) => {
       )
       .then((res) => {
         console.log(res);
-        // dispatch(updateComment(commentInfo));
+        dispatch(updateComment(commentInfo));
       })
       .catch((err) => {
         console.log(err);
@@ -129,7 +129,7 @@ export default handleActions(
       }),
     [UPDATE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
+        console.log(action.payload.commentInfo);
         console.log(state);
       }),
   },
