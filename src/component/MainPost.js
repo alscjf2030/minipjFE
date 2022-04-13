@@ -57,10 +57,34 @@ const MainPost = (props) => {
           // border={"1px solid black"}
           bg={"#E8F5FF"}
         >
-          {content}
+          <Grid width={"80%"} margin={"20px auto"}>
+            {title}
+          </Grid>
+
+          <Image
+              width={"360px"}
+              height={"360px"}
+              margin={"15px auto"}
+              src={url}
+          ></Image>
+
+          <Grid width={"80%"} margin={"10px auto"}>
+            {userinfo?.nickname}
+          </Grid>
+          <Grid width={"80%"} margin={"15px auto"}>
+            {createdAt}
+          </Grid>
+          <Grid
+              width={"80%"}
+              height={"15%"}
+              margin={"20px auto"}
+              padding={"10px"}
+              border={"1px solid black"}
+          >
+            {content}
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
   );
 };
 
