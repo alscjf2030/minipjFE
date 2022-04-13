@@ -192,7 +192,7 @@ export default handleActions(
       [ADD_POST]: (state, action) =>
           produce(state, (draft) => {
             draft.post.unshift(action.payload.post);
-            console.log("스테이트", state);
+            // console.log("스테이트", state);
           }),
       [GETDETAIL]: (state, action) =>
           produce(state, (draft) => {
