@@ -9,13 +9,12 @@ import { actionCreators as postActions } from "../redux/modules/post";
 const ContentsList = (props) => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_token");
-  const userInfo = useSelector((state) => state.user.userInfo);
-
+  const userInfo = useSelector((state) => state?.user?.userInfo);
   const postList = useSelector((state) => state?.post?.post);
 
   useEffect(() => {
     dispatch(postActions.getPostSp(userInfo.userId, token));
-  }, [userInfo]);
+  }, []);
 
   return (
     <div
@@ -31,7 +30,11 @@ const ContentsList = (props) => {
       }}
     >
       {postList?.map((cur, idx) => {
-        return <MainPost key={cur?.boardId} {...cur} />;
+        return (
+          <>
+            <MainPost key={cur?.boardId} {...cur} /> {console.log(cur)}
+          </>
+        );
       })}
     </div>
   );

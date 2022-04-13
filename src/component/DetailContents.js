@@ -8,20 +8,29 @@ import DetailComments from "./DetailComments";
 import AddComments from "./AddComments";
 import Button from "./../elements/Button";
 
+import { useNavigate } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/detail";
+import { actionCreators as userActions } from "../redux/modules/post";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 const DetailContents = (props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const { id } = params;
+  const { id, userId } = params;
+  console.log(typeof userId);
+
   const token = sessionStorage.getItem("jwt_token");
 
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log("유저아이디", userInfo.userId);
+  console.log("유저아이디", typeof userInfo.userId);
   const detail = useSelector((state) => state.post.detail);
   console.log(detail);
+
+  const deletePost = () => {
+    dispatch(userActions.deletePostSp(id, token, navigate));
+  };
 
   useEffect(() => {
     dispatch(postActions.getDetailDB(userInfo.userId, id, token));
@@ -41,10 +50,23 @@ const DetailContents = (props) => {
         </div>
         <div>
           <Grid is_flex width={"200px"} height={"50px"} margin={"40px auto"}>
-            <Button width={"80px"} bg={"#0D6EFD"}>
+            <Button
+              visibility={
+                userInfo.userId === parseInt(userId) ? "visible" : "hidden"
+              }
+              width={"80px"}
+              bg={"#0D6EFD"}
+            >
               수정
             </Button>
-            <Button width={"80px"} bg={"#0D6EFD"}>
+            <Button
+              visibility={
+                userInfo.userId === parseInt(userId) ? "visible" : "hidden"
+              }
+              onClick={deletePost}
+              width={"80px"}
+              bg={"#0D6EFD"}
+            >
               삭제
             </Button>
           </Grid>

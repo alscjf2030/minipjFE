@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../elements/Button";
 import { actionCreators as imageActions } from "../redux/modules/image";
 
-const Upload = ({ image, setImage }) => {
+const Upload = ({ setImage, setPreview }) => {
   const dispatch = useDispatch();
   const fileInput = React.useRef();
 
@@ -22,20 +22,20 @@ const Upload = ({ image, setImage }) => {
     setImage(file);
     reader.readAsDataURL(file);
     // console.log(file);
-    // reader.onloadend = () => {
-    //   setImage(reader.result);
-    //   //   console.log(reader.result);
-    //   // dispatch(imageActions.setPreview(reader.result))
-    // };
+    reader.onloadend = () => {
+      setPreview(reader.result);
+      //   console.log(reader.result);
+      // dispatch(imageActions.setPreview(reader.result))
+    };
   };
 
   return (
-    <input
-      type="file"
-      onChange={selectFile}
-      ref={fileInput}
-      disabled={is_uploading}
-    />
+      <input
+          type="file"
+          onChange={selectFile}
+          ref={fileInput}
+          disabled={is_uploading}
+      />
   );
 };
 

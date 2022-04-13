@@ -5,6 +5,7 @@ import Grid from "../elements/Grid";
 import { actionCreators as userActions } from "../redux/modules/user";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { setClient } from "../api/client";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     if (token) {
+      setClient(token)
       dispatch(userActions.LoginCheckSP(sessionStorage.getItem("jwt_token")));
     }
   }, [token]);

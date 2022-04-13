@@ -15,7 +15,7 @@ const AddPost = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_token");
-  const userId = useSelector((state) => state.user.userInfo.userId);
+  const userInfo = useSelector((state) => state.user.userInfo);
   const post_list = useSelector((state) => state.post.post);
 
   const [image, setImage] = useState();
@@ -25,7 +25,6 @@ const AddPost = (props) => {
   const [topinfo, setTopinfo] = useState("");
   const [bottominfo, setBottominfo] = useState("");
   const [shoesinfo, setShoesinfo] = useState("");
-
 
   const changeContents = (e) => {
     setContent(e.target.value);
@@ -74,8 +73,9 @@ const AddPost = (props) => {
             topinfo: topinfo,
             bottominfo: bottominfo,
             shoesinfo: shoesinfo,
-            userId: userId,
+            userId: userInfo.userId,
             image: image,
+            userinfo: { nickname: userInfo.nickname },
           },
           token
         )
@@ -83,7 +83,6 @@ const AddPost = (props) => {
       navigate("/");
     }
   };
-
 
   // 로그인 후에만 가능합니다.
   // if(!is_login){

@@ -14,23 +14,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
 import { useEffect } from "react";
-import { setClient } from "../api/client";
 
 function App() {
-  return (
-    <MainContainer>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/write" element={<AddPost />} />
-        <Route path="/mypage" element={<MyPage />} />
-      </Routes>
-      <GlobalStyle />
-    </MainContainer>
-  );
+    return (
+        <MainContainer>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/detail/:id/:userId" element={<Detail />} />
+                <Route path="/write" element={<AddPost />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/write/:id" element={<AddPost />} />
+            </Routes>
+            <GlobalStyle />
+        </MainContainer>
+    );
 }
 
 Modal.setAppElement("#root");
