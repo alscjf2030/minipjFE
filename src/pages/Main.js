@@ -8,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
+  console.log(useSelector((state) => state));
 
   return (
-    <Grid width={"70%"} margin={"0 auto"} >
+    <Grid width={"70%"} margin={"0 auto"}>
       <ContentsList />
 
       <div style={{ display: "flex", float: "right" }}>

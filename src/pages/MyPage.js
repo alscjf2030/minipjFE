@@ -5,9 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(myPostDB);
-  }, []);
+  const postInfo = useSelector((state) => {
+    console.log(state);
+  });
+  console.log(postInfo);
+  // useEffect(() => {
+  //   dispatch(myPostDB);
+  // }, []);
 
   const myPost = useSelector((state) => {
     console.log(state);
@@ -15,6 +19,6 @@ const MyPage = () => {
 
   console.log(myPost);
 
-  return <Grid border={"1px solid black"}></Grid>;
+  return <Grid border={"1px solid black"}>dddd</Grid>;
 };
 export default MyPage;

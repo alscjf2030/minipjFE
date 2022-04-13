@@ -128,18 +128,17 @@ const editPostSP = (data, boardId, navigate) => {
 const getPostSp = (userId, token) => {
   return function (dispatch, getState) {
     axios
-        .get(`http://52.79.228.83:8080/api/board/1/1`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res.data.boardList);
-          dispatch(setPost(res.data.boardList));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .get(`http://52.79.228.83:8080/api/board/1/1`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        dispatch(setPost(res.data.boardList));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };
 
@@ -188,7 +187,6 @@ export default handleActions(
   {
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.post_list);
         draft.post = action.payload.post_list;
       }),
     [ADD_POST]: (state, action) =>

@@ -11,6 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
+  console.log(userInfo.userId);
   const token = sessionStorage.getItem("jwt_token") ? true : false;
 
   const logout = () => {
@@ -19,11 +20,8 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (token) {
-      setClient(token)
-      dispatch(userActions.LoginCheckSP(sessionStorage.getItem("jwt_token")));
-    }
-  }, [token]);
+    dispatch(userActions.LoginCheckSP(sessionStorage.getItem("jwt_token")));
+  }, []);
 
   if (token && userInfo) {
     return (
@@ -40,7 +38,13 @@ const Header = () => {
               <Nav className="me-auto">
                 <Grid is_flex>
                   <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="/mypage">내 정보</Nav.Link>
+                  <Nav.Link
+                    onClick={() => {
+                      navigate(`/mypage/${userInfo.userId}`);
+                    }}
+                  >
+                    내 정보
+                  </Nav.Link>
                   <Nav.Link onClick={logout}>로그아웃</Nav.Link>
                 </Grid>
               </Nav>
