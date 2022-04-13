@@ -25,7 +25,7 @@ const MainPost = (props) => {
     >
       <Grid
         border={"1px solid red"}
-        margin={"30px auto"}
+        margin={"30px 10px"}
         height={"680px"}
         width={"365px"}
       >

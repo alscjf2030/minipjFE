@@ -8,7 +8,7 @@ import DetailComments from "./DetailComments";
 import AddComments from "./AddComments";
 import Button from "./../elements/Button";
 
-import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as postActions } from "../redux/modules/detail";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,21 +18,23 @@ const DetailContents = (props) => {
   const { id } = params;
   const token = sessionStorage.getItem("jwt_token");
 
-  const userInfo = useSelector((state)=>state.user.userInfo)
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const detail = useSelector((state) => state.post.detail);
+  console.log(detail);
 
   useEffect(() => {
     dispatch(postActions.getDetailDB(userInfo.userId, id, token));
-  });
+  }, []);
 
   return (
     <HeadLine>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex" }}>
           <Text size={"1.2em"} margin={"60px 20px 0px auto"}>
-            kop
+            {detail?.userinfo?.nickname}
           </Text>
           <Text size={"1.2em"} margin={"60px auto"}>
-            2022-04-12
+            {detail?.createdAt}
           </Text>
         </div>
         <div>
@@ -63,7 +65,7 @@ const DetailContents = (props) => {
               alignItems: "center",
             }}
           >
-            <Image border={"1px solid black"} src="img/logo.png" />
+            <Image border={"1px solid black"} src={detail?.url} />
           </div>
           <div
             style={{
@@ -73,7 +75,7 @@ const DetailContents = (props) => {
               border: "1px solid black",
             }}
           >
-            <Text>상세 페이지 내용</Text>
+            <Text>{detail?.content}</Text>
           </div>
         </div>
         <div style={{ margin: "auto" }}>
