@@ -8,39 +8,42 @@ import Upload from "../shared/Upload";
 import Input from "../elements/Input";
 
 import { useSelector, useDispatch } from "react-redux";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 
 const AddPost = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const token = sessionStorage.getItem("jwt_token");
+
     const params = useParams()
-    console.log(params.id)
 
     const is_login = useSelector((state) => state.user.userInfo.userId);
     const post_list = useSelector((state) => state.post.post);
 
     const postNum = params.id;
 
-    const _post = postNum? post_list.find((p) => p.boardId === postNum) : null;
-    console.log(_post)
+    const _post = postNum ? post_list.find((p) => {
+        return p.boardId === Number(postNum)
+    }) : null;
 
     useEffect(() => {
         if(postNum && !_post){
             console.log("포스트가 없어요")
             navigate(-1)
-
-            return ;
         }
     }, [])
 
-    const [image, setImage] = useState();
-    const [content, setContent] = useState("");
-    const [title, setTitle] = useState("");
-    const [headinfo, setHeadinfo] = useState("");
-    const [topinfo, setTopinfo] = useState("");
-    const [bottominfo, setBottominfo] = useState("");
-    const [shoesinfo, setShoesinfo] = useState("");
+    const [preview, setPreview] = useState(_post?.url || '');
+    const [image, setImage] = useState('');
+    const [content, setContent] = useState(_post?.content || '');
+    const [title, setTitle] = useState(_post?.title || '');
+    const [headinfo, setHeadinfo] = useState(_post?.headinfo || '');
+    const [topinfo, setTopinfo] = useState(_post?.topinfo || '');
+    const [bottominfo, setBottominfo] = useState(_post?.bottominfo || '');
+    const [shoesinfo, setShoesinfo] = useState(_post?.shoesinfo || '');
+
+    //   console.log(image?.split(",")[1]);
 
     const changeContents = (e) => {
         setContent(e.target.value);
@@ -61,23 +64,45 @@ const AddPost = (props) => {
         setShoesinfo(e.target.value);
     };
 
+    const editPost = () => {
+        dispatch(
+            postActions.editPostSP(
+                {
+                    title,
+                    content,
+                    headinfo,
+                    topinfo,
+                    bottominfo,
+                    shoesinfo,
+                    image,
+                    userId: is_login,
+                },
+                postNum,
+                navigate
+            )
+        );
+    }
+
     const addPost = () => {
         dispatch(
             postActions.addPostSP(
                 {
-                    title: "제목",
-                    content: "내용",
-                    headinfo: "모자",
-                    topinfo: "상의",
-                    bottominfo: "하의",
-                    shoesinfo: "신발",
-                    userId: 1,
+                    title: title,
+                    content: content,
+                    headinfo: headinfo,
+                    topinfo: topinfo,
+                    bottominfo: bottominfo,
+                    shoesinfo: shoesinfo,
+                    userId: is_login,
+                    image: image,
                 },
-                image,
+                token,
                 navigate
             )
         );
     };
+
+    console.log(image);
 
     // 로그인 후에만 가능합니다.
     // if(!is_login){
@@ -116,7 +141,7 @@ const AddPost = (props) => {
                     margin: "20px auto",
                 }}
             >
-                <Upload image={image} setImage={setImage} />
+                <Upload image={image} setImage={setImage} setPreview={setPreview} />
             </div>
 
             <Grid padding="16px">
@@ -141,7 +166,7 @@ const AddPost = (props) => {
                         alignItems: "center",
                     }}
                 >
-                    <Image width={"50%"} src={image ? image : "img/logo.png"} />
+                    <Image width={"50%"} src={preview ? preview : "img/logo.png"} />
                 </div>
             </Grid>
 
@@ -211,11 +236,16 @@ const AddPost = (props) => {
             <Grid padding="16px">
                 <Button
                     onClick={() => {
-                        addPost();
-                        navigate("/");
+                        if ( _post ) {
+                            editPost()
+                            navigate(`/detail/${postNum}`);
+                        } else {
+                            addPost();
+                            navigate("/");
+                        }
                     }}
-                    text="게시글 작성"
-                ></Button>
+                    text={_post ? "게시글 수정" : "게시글 작성"}
+                />
             </Grid>
         </div>
     );

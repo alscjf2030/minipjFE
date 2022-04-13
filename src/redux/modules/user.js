@@ -1,8 +1,7 @@
-import {createAction, handleActions} from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import jwt_decode from "jwt-decode";
-import {getApi, postApi, setClient} from "../../api/client";
-
+import { getApi, postApi, setClient } from "../../api/client";
 
 // 액션 타입
 const LOGIN = "LOGIN";
@@ -21,12 +20,12 @@ const initialState = {
 // 미들 웨어
 const SignUpSP = (userId, nickname, pw, checkPw) => {
   return function (dispatch, getState) {
-      postApi("/user/signup", {
-        username: userId,
-        nickname: nickname,
-        password: pw,
-        passwordCheck: checkPw,
-      })
+    postApi("/user/signup", {
+      username: userId,
+      nickname: nickname,
+      password: pw,
+      passwordCheck: checkPw,
+    })
       .then((res) => {
         console.log(res);
       })
@@ -36,10 +35,10 @@ const SignUpSP = (userId, nickname, pw, checkPw) => {
 
 const LoginSP = (userId, pw) => {
   return function (dispatch, getState) {
-      postApi("/user/login", {
-          username: userId,
-          password: pw,
-      })
+    postApi("/user/login", {
+      username: userId,
+      password: pw,
+    })
       .then((res) => {
         const token = res.headers.authorization.split(" ")[1];
         console.log(res);
@@ -49,7 +48,7 @@ const LoginSP = (userId, pw) => {
         const nickname = JSON.parse(atob(token.split(".")[1])).NICKNAME;
         const userId = JSON.parse(atob(token.split(".")[1])).USER_ID;
         sessionStorage.setItem("jwt_token", token);
-        setClient(token)
+        setClient(token);
         dispatch(
           logIn({
             useremail: useremail,
@@ -58,7 +57,7 @@ const LoginSP = (userId, pw) => {
           })
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response));
   };
 };
 
@@ -80,11 +79,11 @@ const LoginCheckSP = (token) => {
 
 const LogOutSP = () => {
   return function (dispatch) {
-      getApi("/user/logout")
+    getApi("/user/logout")
       .then((res) => {
         console.log(res);
         sessionStorage.removeItem("jwt_token");
-        setClient('')
+        setClient("");
         dispatch(logOut());
       })
       .catch((err) => {
@@ -95,17 +94,17 @@ const LogOutSP = () => {
 
 // 리듀서
 export default handleActions(
-    {
-        [LOGIN]: (state, action) =>
-            produce(state, (draft) => {
-                draft.userInfo = action.payload.userInfo;
-            }),
-        [LOGOUT]: (state, action) =>
-            produce(state, (draft) => {
-                draft.userInfo = {};
-            }),
-    },
-    initialState
+  {
+    [LOGIN]: (state, action) =>
+      produce(state, (draft) => {
+        draft.userInfo = action.payload.userInfo;
+      }),
+    [LOGOUT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.userInfo = {};
+      }),
+  },
+  initialState
 );
 
 const actionCreators = {

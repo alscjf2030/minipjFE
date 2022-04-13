@@ -21,6 +21,7 @@ const Img = styled.img`
   height: ${(props) => props.height};
   ${(props) => (props.bor_radius ? `border-radius: 10px;` : "")}
   border:${(props) => props.border};
+
 `;
 
 export default Image;

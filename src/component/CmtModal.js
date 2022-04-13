@@ -16,6 +16,8 @@ const CmtModal = (props) => {
     setComment(e.target.value);
   };
 
+  console.log(commentInfo);
+
   return (
     <>
       <Modal
@@ -52,12 +54,7 @@ const CmtModal = (props) => {
             onClick={() => {
               dispatch(
                 commentActions.updateCommentSP(
-                  {
-                    userId: commentInfo.userId,
-                    boardId: 1,
-                    comment: comment,
-                    commentId: commentInfo.commentId,
-                  },
+                  { ...commentInfo, comment: comment },
                   token
                 )
               );

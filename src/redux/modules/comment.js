@@ -28,6 +28,7 @@ const addCommentSP = (userinfo, token) => {
           userId: userinfo.userId,
           boardId: userinfo.boardId,
           comment: userinfo.comment,
+          parentId: 0,
         },
         {
           headers: {
@@ -52,7 +53,7 @@ const getCommentSP = (boardId, token) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         const post = res.data;
         dispatch(getComment(post));
       })
@@ -81,7 +82,7 @@ const deleteCommentSP = (commentInfo, token) => {
 
 const updateCommentSP = (commentInfo, token) => {
   return function (dispatch) {
-    console.log(token);
+    console.log(commentInfo);
     axios
       .put(
         `http://52.79.228.83:8080/api/comment/${commentInfo.commentId}`,
@@ -129,7 +130,7 @@ export default handleActions(
       }),
     [UPDATE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
+        console.log(action.payload.commentInfo);
         console.log(state);
       }),
   },
