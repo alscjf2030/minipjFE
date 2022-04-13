@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import Grid from "../elements/Grid";
 import Text from "../elements/Text";
@@ -7,24 +7,40 @@ import Button from "../elements/Button";
 import Upload from "../shared/Upload";
 import Input from "../elements/Input";
 
-import {useSelector, useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {actionCreators as postActions} from "../redux/modules/post";
+import { useSelector, useDispatch } from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const AddPost = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const params = useParams()
+    console.log(params.id)
 
     const is_login = useSelector((state) => state.user.userInfo.userId);
     const post_list = useSelector((state) => state.post.post);
 
-    const [image, setImage] = useState()
-    const [content, setContent] = useState('');
-    const [title, setTitle] = useState('');
-    const [headinfo, setHeadinfo] = useState('');
-    const [topinfo, setTopinfo] = useState('');
-    const [bottominfo, setBottominfo] = useState('');
-    const [shoesinfo, setShoesinfo] = useState('');
+    const postNum = params.id;
+
+    const _post = postNum? post_list.find((p) => p.boardId === postNum) : null;
+    console.log(_post)
+
+    useEffect(() => {
+        if(postNum && !_post){
+            console.log("포스트가 없어요")
+            navigate(-1)
+
+            return ;
+        }
+    }, [])
+
+    const [image, setImage] = useState();
+    const [content, setContent] = useState("");
+    const [title, setTitle] = useState("");
+    const [headinfo, setHeadinfo] = useState("");
+    const [topinfo, setTopinfo] = useState("");
+    const [bottominfo, setBottominfo] = useState("");
+    const [shoesinfo, setShoesinfo] = useState("");
 
     const changeContents = (e) => {
         setContent(e.target.value);
@@ -46,19 +62,21 @@ const AddPost = (props) => {
     };
 
     const addPost = () => {
-        dispatch(postActions.addPostSP(
-            {
-                title : "제목",
-                content : "내용",
-                headinfo : "모자",
-                topinfo : "상의",
-                bottominfo: "하의",
-                shoesinfo : "신발",
-                userId: 1,
-            },
-            image,
-            navigate
-        ));
+        dispatch(
+            postActions.addPostSP(
+                {
+                    title: "제목",
+                    content: "내용",
+                    headinfo: "모자",
+                    topinfo: "상의",
+                    bottominfo: "하의",
+                    shoesinfo: "신발",
+                    userId: 1,
+                },
+                image,
+                navigate
+            )
+        );
     };
 
     // 로그인 후에만 가능합니다.
@@ -69,13 +87,13 @@ const AddPost = (props) => {
     //             alignItems: "center",
     //             flexDirection: "column"}}>
     //             <Text bold >회원만 이용이 가능합니다.</Text>
-    //             <Button onClick={() => {navigate("/")}}>돌아가기</Button>
+    //             <Button onClick={() => {navigate("/", { replace : true })}}>돌아가기</Button>
     //         </div>
     //     )
     // }
 
     return (
-        <div style={{position: "relative", margin: "auto", maxWidth: "80%"}}>
+        <div style={{ position: "relative", margin: "auto", maxWidth: "80%" }}>
             <div
                 style={{
                     display: "flex",
@@ -123,7 +141,7 @@ const AddPost = (props) => {
                         alignItems: "center",
                     }}
                 >
-                    <Image width={"50%"} src={image ? image : "img/logo.png"}/>
+                    <Image width={"50%"} src={image ? image : "img/logo.png"} />
                 </div>
             </Grid>
 
@@ -135,20 +153,50 @@ const AddPost = (props) => {
                     alignItems: "center",
                 }}
             >
-                <div style={{margin: "10px"}}>
-                    <input onChange={changeTitle} value={title} type="text" size="50" placeholder="게시글 제목"/>
+                <div style={{ margin: "10px" }}>
+                    <input
+                        onChange={changeTitle}
+                        value={title}
+                        type="text"
+                        size="50"
+                        placeholder="게시글 제목"
+                    />
                 </div>
-                <div style={{margin: "10px"}}>
-                    <input onChange={changeHead} value={headinfo} type="text" size="50" placeholder="모자 브랜드"/>
+                <div style={{ margin: "10px" }}>
+                    <input
+                        onChange={changeHead}
+                        value={headinfo}
+                        type="text"
+                        size="50"
+                        placeholder="모자 브랜드"
+                    />
                 </div>
-                <div style={{margin: "10px"}}>
-                    <input onChange={changeTop} value={topinfo} type="text" size="50" placeholder="상의 브랜드"/>
+                <div style={{ margin: "10px" }}>
+                    <input
+                        onChange={changeTop}
+                        value={topinfo}
+                        type="text"
+                        size="50"
+                        placeholder="상의 브랜드"
+                    />
                 </div>
-                <div style={{margin: "10px"}}>
-                    <input onChange={changeBottom} value={bottominfo} type="text" size="50" placeholder="하의 브랜드"/>
+                <div style={{ margin: "10px" }}>
+                    <input
+                        onChange={changeBottom}
+                        value={bottominfo}
+                        type="text"
+                        size="50"
+                        placeholder="하의 브랜드"
+                    />
                 </div>
-                <div style={{margin: "10px"}}>
-                    <input onChange={changeShoes} value={shoesinfo} type="text" size="50" placeholder="신발 브랜드"/>
+                <div style={{ margin: "10px" }}>
+                    <input
+                        onChange={changeShoes}
+                        value={shoesinfo}
+                        type="text"
+                        size="50"
+                        placeholder="신발 브랜드"
+                    />
                 </div>
                 <textarea
                     onChange={changeContents}
@@ -167,8 +215,7 @@ const AddPost = (props) => {
                         navigate("/");
                     }}
                     text="게시글 작성"
-                >
-                </Button>
+                ></Button>
             </Grid>
         </div>
     );

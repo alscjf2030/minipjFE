@@ -24,6 +24,7 @@ const addCommentSP = (userinfo, token) => {
       .post(
         "http://52.79.228.83:8080/api/comment/regist",
         {
+            parentId: 0,
           userId: userinfo.userId,
           boardId: userinfo.boardId,
           comment: userinfo.comment,

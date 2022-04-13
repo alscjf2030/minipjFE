@@ -26,6 +26,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/detail/" element={<Detail />} />
                 <Route path="/write" element={<AddPost />} />
+                <Route path="/write/:id" element={<AddPost />} />
             </Routes>
             <GlobalStyle />
         </MainContainer>

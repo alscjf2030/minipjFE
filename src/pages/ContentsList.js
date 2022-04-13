@@ -11,23 +11,113 @@ const ContentsList = (props) => {
     const post_list = useSelector((state) => state.post.list)
     console.log(post_list)
 
+    const userNick = useSelector((state) => state.user.userInfo.username)
+    console.log(userNick)
+
     return (
         <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"}}>
+        }}>
             {post_list.map((p, idx) => {
-                return <MainPost key={p.boardId} {...p}/>
+                if(p.userNick.username === userNick?.userInfo.nickname){
+                    return <MainPost key={p.boardId} {...p} isMe />
+                }else{
+                    return <MainPost key={p.boardId} {...p}/>
+                }
             })}
-            <div>
-                <div>작성자 / 시간</div>
+            <div style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                width: "100px"
+            }}>
+                <div>
+                    <div>작성자 / 시간</div>
 
-                <div>제목</div>
+                    <div>제목</div>
 
-                <Image src="img/logo.png"/>
+                    <Image src="img/logo.png"/>
 
-                <div>게시글 내용</div>
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
+
+                <div>
+                    <div>작성자 / 시간</div>
+
+                    <div>제목</div>
+
+                    <Image src="img/logo.png"/>
+
+                    <div>게시글 내용</div>
+                </div>
             </div>
         </div>
     )
