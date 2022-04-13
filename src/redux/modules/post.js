@@ -81,6 +81,7 @@ const addPostSP = (data, token) => {
         console.log(err);
         window.alert("게시물 작성에 실패했습니다.");
       });
+
     dispatch(addPost(data));
   };
 };
@@ -121,44 +122,46 @@ const editPostSP = (data, boardId, navigate) => {
         window.alert("게시물 수정에 실패했습니다.");
       });
   };
+
 };
 
 const getPostSp = (userId, token) => {
   return function (dispatch, getState) {
     axios
-      .get(`http://52.79.228.83:8080/api/board/1/1`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data.boardList);
-        dispatch(setPost(res.data.boardList));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .get(`http://52.79.228.83:8080/api/board/1/1`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data.boardList);
+          dispatch(setPost(res.data.boardList));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 };
 
 const getDetailDB = (userId, boardId, token) => {
   return function (dispatch, getState) {
     axios
-      .get(`http://52.79.228.83:8080/api/board/detail/${boardId}/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        const detail = res.data;
-        dispatch(getDetial(detail));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .get(`http://52.79.228.83:8080/api/board/detail/${boardId}/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          const detail = res.data;
+          dispatch(getDetial(detail));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 };
+
 
 const deletePostSp = (boardId, token, navigate) => {
   return function (dispatch, getState) {
