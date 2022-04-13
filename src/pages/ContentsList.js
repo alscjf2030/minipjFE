@@ -15,7 +15,7 @@ const ContentsList = (props) => {
 
   useEffect(() => {
     dispatch(postActions.getPostSp(userInfo.userId, token));
-  }, [postList]);
+  }, [userInfo]);
 
   return (
     <div
