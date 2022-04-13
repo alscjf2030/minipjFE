@@ -38,6 +38,7 @@ const ContentsList = (props) => {
       })}
     </div>
   );
+
 };
 
 export default ContentsList;

@@ -10,11 +10,14 @@ import Button from "./../elements/Button";
 
 import { useNavigate } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/detail";
+
 import { actionCreators as userActions } from "../redux/modules/post";
+
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 const DetailContents = (props) => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
@@ -73,48 +76,80 @@ const DetailContents = (props) => {
         </div>
       </div>
 
-      <div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              width={"100%"}
-              border={"1px solid black"}
-              src={detail?.url}
-            />
-          </div>
-          <div
-            style={{
-              width: "50%",
-              height: "100%",
-              textAlign: "center",
-              border: "1px solid black",
-            }}
-          >
-            <Text>{detail?.content}</Text>
-          </div>
-        </div>
-        <div style={{ margin: "auto" }}>
-          <Grid padding="16px">
-            <AddComments />
-            <DetailComments />
-          </Grid>
-        </div>
-      </div>
-    </HeadLine>
-  );
+    return (
+        <HeadLine>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{ display: "flex" }}>
+                    <Text size={"1.2em"} margin={"60px 20px 0px auto"}>
+                        {detail?.userinfo?.nickname}
+                    </Text>
+                    <Text size={"1.2em"} margin={"60px auto"}>
+                        {detail?.createdAt}
+                    </Text>
+                </div>
+                {userInfo.userId === detail.userId && (
+                    <div>
+                        <Grid is_flex width={"200px"} height={"50px"} margin={"40px auto"}>
+                                <Button onClick={() => {
+                                    navigate(`/write/${id}`)
+                                }} width={"80px"} bg={"#0D6EFD"}>
+                                    수정
+                                </Button>
+
+                                <Button onClick={deletePost} width={"80px"} bg={"#0D6EFD"}>
+                                    삭제
+                                </Button>
+                        </Grid>
+                    </div>
+                )}
+            </div>
+
+            <div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <div
+                        style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Image
+                            width={"70%"}
+                            border={"1px solid black"}
+                            src={detail?.url}
+                        />
+                    </div>
+                    <div
+                        style={{
+                            width: "50%",
+                            height: "100%",
+                            textAlign: "center",
+                            border: "1px solid black",
+                        }}
+                    >
+                        <Text>{detail?.headinfo}</Text>
+                        <Text>{detail?.topinfo}</Text>
+                        <Text>{detail?.bottominfo}</Text>
+                        <Text>{detail?.shoesinfo}</Text>
+                        <Text>{detail?.content}</Text>
+                    </div>
+                </div>
+                <div style={{ margin: "auto" }}>
+                    <Grid padding="16px">
+                        <AddComments />
+                        <DetailComments />
+                    </Grid>
+                </div>
+            </div>
+        </HeadLine>
+    );
 };
 
 export default DetailContents;
