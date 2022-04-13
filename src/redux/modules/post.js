@@ -68,13 +68,13 @@ const addPostSP = (data, token) => {
       })
       .then((res) => {
         console.log(res);
-        // dispatch(addPost(data));
-        // navigate("/", { replace: true });
+        dispatch(addPost(data));
       })
       .catch((err) => {
         console.log(err);
         window.alert("게시물 작성에 실패했습니다.");
       });
+    dispatch(addPost(data));
   };
 };
 
@@ -149,7 +149,8 @@ export default handleActions(
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.post_list);
+        draft.post.unshift(action.payload.post);
+        console.log("스테이트", state);
       }),
     [GETDETAIL]: (state, action) =>
       produce(state, (draft) => {

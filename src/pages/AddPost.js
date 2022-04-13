@@ -49,21 +49,41 @@ const AddPost = (props) => {
   };
 
   const addPost = () => {
-    dispatch(
-      postActions.addPostSP(
-        {
-          title: title,
-          content: content,
-          headinfo: headinfo,
-          topinfo: topinfo,
-          bottominfo: bottominfo,
-          shoesinfo: shoesinfo,
-          userId: is_login,
-          image: image,
-        },
-        token
-      )
-    );
+    if (!headinfo) {
+      setHeadinfo("X");
+    }
+    if (!topinfo) {
+      setTopinfo("X");
+    }
+    if (!bottominfo) {
+      setBottominfo("X");
+    }
+    if (!shoesinfo) {
+      setShoesinfo("X");
+    }
+    if (!title) {
+      return window.alert("제목을 입력해주세요");
+    }
+    if (!content) {
+      return window.alert("내용을 입력해주세요");
+    } else {
+      dispatch(
+        postActions.addPostSP(
+          {
+            title: title,
+            content: content,
+            headinfo: headinfo,
+            topinfo: topinfo,
+            bottominfo: bottominfo,
+            shoesinfo: shoesinfo,
+            userId: is_login,
+            image: image,
+          },
+          token
+        )
+      );
+      navigate("/");
+    }
   };
 
   console.log(image);
@@ -198,13 +218,7 @@ const AddPost = (props) => {
       </div>
 
       <Grid padding="16px">
-        <Button
-          onClick={() => {
-            addPost();
-            navigate("/");
-          }}
-          text="게시글 작성"
-        ></Button>
+        <Button onClick={addPost} text="게시글 작성"></Button>
       </Grid>
     </div>
   );

@@ -21,6 +21,7 @@ const DetailContents = (props) => {
   const userInfo = useSelector((state) => state.user.userInfo);
   console.log("유저아이디", userInfo.userId);
   const detail = useSelector((state) => state.post.detail);
+  console.log(detail);
 
   useEffect(() => {
     dispatch(postActions.getDetailDB(userInfo.userId, id, token));
