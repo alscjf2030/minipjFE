@@ -10,9 +10,8 @@ const ContentsList = (props) => {
     const dispatch = useDispatch();
     const token = sessionStorage.getItem("jwt_token");
     const userInfo = useSelector((state) => state.user.userInfo);
+  const postList = useSelector((state) => state?.post?.post);
 
-    const postList = useSelector((state) => state?.post?.post);
-    // console.log(postList)
 
     useEffect(() => {
         dispatch(postActions.getPostSp(userInfo.userId, token));
