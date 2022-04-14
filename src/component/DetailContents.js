@@ -19,12 +19,8 @@ const DetailContents = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const { id, userId } = params;
-  console.log(typeof userId);
-
   const token = sessionStorage.getItem("jwt_token");
-
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log("유저아이디", typeof userInfo.userId);
   const detail = useSelector((state) => state.post.detail);
   console.log(detail);
 
@@ -39,7 +35,14 @@ const DetailContents = (props) => {
 
   return (
     <HeadLine>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          width: "1000px",
+          margin: "0px auto",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <div style={{ display: "flex" }}>
           <Text size={"1.2em"} margin={"60px 20px 0px auto"}>
             {detail?.userinfo?.nickname}
@@ -80,6 +83,10 @@ const DetailContents = (props) => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            border: "1px solid slateblue",
+            width: "1000px",
+            margin: "0 auto",
+            borderRadius: "20px",
           }}
         >
           <div
@@ -90,8 +97,8 @@ const DetailContents = (props) => {
             }}
           >
             <Image
-              width={"100%"}
-              border={"1px solid black"}
+              width={"660px"}
+              // border={"1px solid black"}
               src={detail?.url}
             />
           </div>
@@ -100,10 +107,15 @@ const DetailContents = (props) => {
               width: "50%",
               height: "100%",
               textAlign: "center",
-              border: "1px solid black",
             }}
           >
-            <Text>{detail?.content}</Text>
+            <Text>
+              <p>모자 브랜드 : {detail?.content}</p>
+              <p>상의 브랜드 : {detail?.content}</p>
+              <p>하의 브랜드 : {detail?.content}</p>
+              <p>신발 브랜드 : {detail?.content}</p>
+              <p>{detail?.content}</p>
+            </Text>
           </div>
         </div>
         <div style={{ margin: "auto" }}>
