@@ -1,15 +1,20 @@
-import React, {useState, useEffect} from "react";
-import styled from "styled-components";
-import HeartImg from "../assets/heart.png";
-import EmptyHeartImg from "../assets/empty-heart.png";
+import React, {useState} from "react";
 
+import HeartImg from "../like/HeartImg.png"
+import EmptyHeartImg from "../like/EmptyHeartImg.png"
 
-const Heart = ({like, onClick}) => {
+import {useDispatch} from "react-redux";
+
+const Heart = (props) => {
+    const dispatch = useDispatch()
+
+    const [like, setLike] = useState(false);
+
     return (
-        <Heart src={like ? HeartImg : EmptyHeartImg} onClick={onClick}/>);
-};
+        <div>
+
+        </div>
+    )
+}
+
 export default Heart;
-
-const Heart = styled.img`
-
-`;

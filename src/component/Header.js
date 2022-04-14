@@ -21,7 +21,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(userActions.LoginCheckSP(sessionStorage.getItem("jwt_token")));
-  }, []);
+  }, [userInfo.userId]);
 
   if (token && userInfo) {
     return (
@@ -40,7 +40,7 @@ const Header = () => {
                   <Nav.Link href="/">Home</Nav.Link>
                   <Nav.Link
                     onClick={() => {
-                      navigate(`/mypage/${userInfo.userId}`);
+                      navigate(`/mypage/${userInfo?.userId}`);
                     }}
                   >
                     내 정보
