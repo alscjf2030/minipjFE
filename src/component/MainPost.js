@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import { useNavigate } from "react-router";
+import Button from "../elements/Button";
 
 const MainPost = (props) => {
   const navigate = useNavigate();
@@ -46,7 +47,14 @@ const MainPost = (props) => {
         <Grid width={"80%"} margin={"10px auto 0 auto"}>
           {userinfo?.nickname}
         </Grid>
-        <Grid width={"80%"} margin={"0px auto"} color={"gray"}>
+        <Grid
+          is_flex
+          width={"80%"}
+          margin={"0px auto"}
+          color={"gray"}
+          height={'25px'}
+          // border={"1px solid black"}
+        >
           {createdAt}
         </Grid>
         <Grid

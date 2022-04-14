@@ -110,11 +110,25 @@ const DetailContents = (props) => {
             }}
           >
             <Text>
-              <p>모자 브랜드 : {detail?.content}</p>
-              <p>상의 브랜드 : {detail?.content}</p>
-              <p>하의 브랜드 : {detail?.content}</p>
-              <p>신발 브랜드 : {detail?.content}</p>
-              <p>{detail?.content}</p>
+              {console.log(detail)}
+              <p>모자 브랜드 : {detail?.headinfo ? detail.headinfo : "없음"}</p>
+              <p>상의 브랜드 : {detail?.topinfo ? detail.topinfo : "없음"}</p>
+              <p>
+                하의 브랜드 : {detail?.bottominfo ? detail.bottominfo : "없음"}
+              </p>
+              <p>
+                신발 브랜드 : {detail?.shoesinfo ? detail.shoesinfo : "없음"}
+              </p>
+              <p
+                style={{
+                  margin: "5px auto",
+                  border: "1px solid black",
+                  width: "300px",
+                  wordWrap: "breakWord",
+                }}
+              >
+                {detail?.content}
+              </p>
             </Text>
           </div>
         </div>

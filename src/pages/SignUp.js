@@ -80,12 +80,14 @@ const SignUp = () => {
         >
           <p>비밀번호</p>
           <Input
+            type={"password"}
             width={"300px"}
             onChange={(e) => setPw(e.target.value)}
           ></Input>
         </Grid>
         <Grid
           width={"300px"}
+          type={"password"}
           // border={"1px solid black"}
           height={"30px"}
           margin={"50px auto"}

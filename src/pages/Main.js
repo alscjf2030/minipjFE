@@ -5,10 +5,17 @@ import Permit from "../shared/Permit";
 import Button from "../elements/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { myLikeDB, disLikeDB } from "./../redux/modules/like";
 
 const Main = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(useSelector((state) => state));
+  const token = sessionStorage.getItem("jwt_token");
+
+  useEffect(() => {
+    dispatch(disLikeDB(1, 1, token));
+    // dispatch(myLikeDB(1, 1, token));
+  }, []);
 
   return (
     <Grid width={"70%"} margin={"0 auto"}>
