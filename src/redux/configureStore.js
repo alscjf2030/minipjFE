@@ -7,6 +7,7 @@ import post from "./modules/post";
 import image from "./modules/image";
 import mypage from "./modules/mypage";
 import detail from "./modules/detail";
+import like from "./modules/like";
 
 const rootReducer = combineReducers({
   user: user,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   image: image,
   mypage: mypage,
   detail: detail,
+  like: like,
 });
 
 const middlewares = [thunk];

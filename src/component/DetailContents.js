@@ -7,7 +7,6 @@ import Text from "../elements/Text";
 import DetailComments from "./DetailComments";
 import AddComments from "./AddComments";
 import Button from "./../elements/Button";
-import Heart from "./Heart";
 
 import { useNavigate } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/detail";
@@ -111,18 +110,30 @@ const DetailContents = (props) => {
                         }}
                     >
                         <Text>
-                            <p>모자 브랜드 : {detail?.content}</p>
-                            <p>상의 브랜드 : {detail?.content}</p>
-                            <p>하의 브랜드 : {detail?.content}</p>
-                            <p>신발 브랜드 : {detail?.content}</p>
-                            <p>{detail?.content}</p>
+                            {console.log(detail)}
+                            <p>모자 브랜드 : {detail?.headinfo ? detail.headinfo : "없음"}</p>
+                            <p>상의 브랜드 : {detail?.topinfo ? detail.topinfo : "없음"}</p>
+                            <p>
+                                하의 브랜드 : {detail?.bottominfo ? detail.bottominfo : "없음"}
+                            </p>
+                            <p>
+                                신발 브랜드 : {detail?.shoesinfo ? detail.shoesinfo : "없음"}
+                            </p>
+                            <p
+                                style={{
+                                    margin: "5px auto",
+                                    border: "1px solid black",
+                                    width: "300px",
+                                    wordWrap: "breakWord",
+                                }}
+                            >
+                                {detail?.content}
+                            </p>
                         </Text>
                     </div>
                 </div>
                 <div style={{ margin: "auto" }}>
-                    <Grid is_flex
-                          padding="16px">
-                        <Heart />
+                    <Grid padding="16px">
                         <AddComments />
                         <DetailComments />
                     </Grid>

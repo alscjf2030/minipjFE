@@ -39,6 +39,7 @@ const Login = () => {
           <p>비밀번호</p>
           <Input
             width={"250px"}
+            type={"password"}
             onChange={(e) => {
               setPw(e.target.value);
             }}
